@@ -2,7 +2,7 @@
 __pycache__/
 *.pyc
 venv/
-data/aveda.db
+data/aespa_tracker.db
 data/reports/
 logs/
 .DS_Store

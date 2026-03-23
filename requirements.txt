@@ -1,4 +1,4 @@
-# AVEDA Brand Intelligence System - Dependencies
+# aespa Brand Intelligence System - Dependencies
 
 # Search & Scraping
 google-search-results>=2.4.2    # SerpAPI SDK

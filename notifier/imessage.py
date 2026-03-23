@@ -1,5 +1,5 @@
 """
-AVEDA 品牌情報系統 - iMessage 通知模組
+aespa 情報系統 - iMessage 通知模組
 透過 macOS AppleScript 發送 iMessage 推播通知。
 """
 
@@ -74,7 +74,7 @@ def format_daily_summary(report: DailyReport) -> str:
     neg_pct = round(report.negative_count / total * 100)
 
     lines = [
-        f"🌿 AVEDA 每日情報 — {report.date}",
+        f"🌿 aespa 每日情報 — {report.date}",
         f"",
         f"📊 分析 {report.total_items} 筆輿情：",
         f"  😊 正面 {report.positive_count} 筆 ({pos_pct}%)",
@@ -145,12 +145,12 @@ if __name__ == "__main__":
         negative_count=3,
         neutral_count=4,
         top_products=[
-            {"keyword": "AVEDA 蘊活菁華", "count": 5},
-            {"keyword": "AVEDA 木梳", "count": 3},
-            {"keyword": "AVEDA", "count": 2},
+            {"keyword": "Gemini 模型", "count": 5},
+            {"keyword": "Gemini API", "count": 3},
+            {"keyword": "aespa", "count": 2},
         ],
         events=[
-            {"event_type": "promotion", "event_detail": "AVEDA 母親節全館 85 折", "event_date": "2026-05-01"},
+            {"event_type": "promotion", "event_detail": "Gemini全館 85 折", "event_date": "2026-05-01"},
         ],
         items=[],
     )

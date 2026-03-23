@@ -1,5 +1,5 @@
 """
-AVEDA 品牌情報系統 - Tavily 搜尋模組
+aespa 情報系統 - Tavily 搜尋模組
 透過 Tavily AI API 進行精準網路搜尋，獲取相關新聞與輿情。
 """
 
@@ -40,6 +40,7 @@ def search_tavily(keyword: str, max_results: int = 5) -> List[CollectedItem]:
             query=keyword,
             search_depth="advanced",
             max_results=max_results,
+            days=1,  # 限制搜尋過去 24 小時的資訊
             include_images=False,
             include_raw_content=False,
         )

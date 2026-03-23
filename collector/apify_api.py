@@ -1,5 +1,5 @@
 """
-AVEDA 品牌情報系統 - Apify 搜尋模組
+aespa 情報系統 - Apify 搜尋模組
 透過 Apify 的 Google Search Scraper Actor 進行大規模網頁採集
 """
 
@@ -35,7 +35,8 @@ def collect_apify() -> List[CollectedItem]:
     run_input = {
         "queries": "\n".join(target_queries),
         "maxPagesPerQuery": 1,
-        "resultsPerPage": 3
+        "resultsPerPage": 3,
+        "customParameters": "tbs=qdr:d" # 強制要求只取得過去 24 小時的最新資訊
     }
 
     try:
@@ -46,7 +47,7 @@ def collect_apify() -> List[CollectedItem]:
         
         # 從資料集中逐筆拉回資料
         for task in client.dataset(run["defaultDatasetId"]).iterate_items():
-            query_term = task.get("searchQuery", {}).get("term", "AVEDA")
+            query_term = task.get("searchQuery", {}).get("term", "aespa")
             organic_results = task.get("organicResults", [])
             
             for r in organic_results:

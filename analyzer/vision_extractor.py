@@ -1,5 +1,5 @@
 """
-AVEDA 品牌情報系統 - 視覺情緒與活動分析
+aespa 情報系統 - 視覺情緒與活動分析
 將 Playwright 獲取的長截圖送給 Gemini 2.0 Flash，直接一條龍抽取：貼文摘要、情緒、與活動資訊！
 """
 
@@ -13,18 +13,18 @@ from analyzer.llm_client import call_llm_json_with_image
 logger = logging.getLogger(__name__)
 
 # 設計一個非常嚴謹的 JSON 分析 Prompt 用於圖片
-VISION_PROMPT = """你是一位品牌輿情分析專家與數據擷取工程師。這是一張社群平台（如 Dcard 或 Threads）搜尋「AVEDA（或肯夢）」的結果截圖。
-你的任務是從截圖中辨識出「所有提及 AVEDA 的各篇貼文」，並將每篇貼文的分析結果整理出一個完整的 JSON 陣列 (Array of objects)。
+VISION_PROMPT = """你是一位品牌輿情分析專家與數據擷取工程師。這是一張社群平台（Threads）搜尋「aespa」的結果截圖。
+請分析圖中的發文標題、內文摘要、發文時間、讚數與留言數等元素，將這些貼文轉換成純粹的 JSON 格式清單回傳。
 
-請確保完全遵守以下的 JSON 結構，必須回傳純 JSON 陣列，不要有 markdown codeblock，直接從 [ 開始：
+請回傳此 JSON 格式的陣列：
 [
   {
-    "title": "該篇貼文標題",
-    "snippet": "該篇貼文內容重點摘要（如果有內文）",
-    "source": "若截圖是從 Dcard 來的就填 Dcard，Threads 來的填 Threads",
-    "url": "依照來源填入預設網址，如 https://www.dcard.tw/search?query=AVEDA 或是 https://www.threads.net/search?q=AVEDA",
+    "title": "貼文的標題或第一句",
+    "snippet": "貼文的詳細內容摘要",
+    "source": "Threads",
+    "url": "依照來源填入預設網址，如 https://www.threads.net/search?q=aespa",
     "language": "zh",
-    "keyword": "AVEDA",
+    "keyword": "aespa",
     "sentiment": "positive 或是 negative 或是 neutral",
     "confidence": 0.9,
     "reason": "評分理由（20字內）",

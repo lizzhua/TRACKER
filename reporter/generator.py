@@ -1,5 +1,5 @@
 """
-AVEDA 品牌情報系統 - 報告生成模組
+aespa 情報系統 - 報告生成模組
 將分析結果注入 Jinja2 HTML 模板，生成靜態 Dashboard 報告。
 """
 
@@ -130,20 +130,20 @@ if __name__ == "__main__":
     # 模擬測試資料
     test_items = [
         CollectedItem(
-            title="AVEDA 蘊活菁華超好用",
+            title="Gemini 模型超好用",
             snippet="用了三個月掉髮減少好多",
             url="https://example.com/1",
             source="Dcard",
             language="zh",
-            keyword="AVEDA 蘊活菁華",
+            keyword="Gemini 模型",
         ),
         CollectedItem(
-            title="AVEDA shampoo review",
+            title="aespa shampoo review",
             snippet="Great scent and effective",
             url="https://example.com/2",
             source="Reddit",
             language="en",
-            keyword="AVEDA",
+            keyword="aespa",
         ),
     ]
     test_sentiments = [

@@ -3,221 +3,389 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AVEDA 品牌情報日報 — {{ date }}</title>
-    <meta name="description" content="AVEDA 品牌每日輿情分析報告，含情緒分析、熱門產品與活動追蹤。">
+    <title>aespa情報日報 — {{ date }}</title>
+    <meta name="description" content="aespa 品牌每日輿情分析報告，含情緒分析、熱門產品與活動追蹤。">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
         :root {
-            --bg-primary: #0f0f0f;
-            --bg-card: #1a1a1a;
-            --bg-card-hover: #222222;
-            --border: #2a2a2a;
-            --text-primary: #e8e8e8;
-            --text-secondary: #888888;
-            --accent-green: #34d399;
-            --accent-red: #f87171;
-            --accent-amber: #fbbf24;
-            --accent-blue: #60a5fa;
-            --accent-purple: #a78bfa;
-            --gradient-brand: linear-gradient(135deg, #34d399, #059669);
+            --bg-primary: #05010d;
+            --bg-glass: rgba(20, 10, 30, 0.55);
+            --bg-glass-hover: rgba(30, 15, 45, 0.75);
+            --border-glass: rgba(255, 255, 255, 0.12);
+            --text-primary: #f8fafc;
+            --text-secondary: #a3a3bd;
+            --accent-green: #10b981;
+            --accent-green-glow: rgba(16, 185, 129, 0.4);
+            --accent-red: #f43f5e;
+            --accent-red-glow: rgba(244, 63, 94, 0.4);
+            --accent-amber: #f59e0b;
+            --accent-amber-glow: rgba(245, 158, 11, 0.4);
+            --accent-blue: #06b6d4;  /* aespa cyan */
+            --accent-blue-glow: rgba(6, 182, 212, 0.4);
+            --accent-purple: #c026d3; /* aespa magenta */
+            --gradient-brand: linear-gradient(135deg, #06b6d4, #8b5cf6, #c026d3); /* Cyberpunk gradient */
+            --gradient-bg: radial-gradient(circle at 10% 20%, rgba(192, 38, 211, 0.15), transparent 35%),
+                           radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.15), transparent 35%);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Inter', 'Noto Sans TC', -apple-system, sans-serif;
+            font-family: 'Outfit', 'Noto Sans TC', sans-serif;
             background: var(--bg-primary);
+            background-image: var(--gradient-bg);
+            background-attachment: fixed;
             color: var(--text-primary);
             min-height: 100vh;
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         /* ── Header ── */
         .header {
-            background: linear-gradient(135deg, #0a1a0f 0%, #0f2518 50%, #0a1a0f 100%);
-            border-bottom: 1px solid var(--border);
-            padding: 2.5rem 2rem;
+            padding: 4rem 2rem 3rem;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: 50%;
+            transform: translateX(-50%);
+            width: 80vw; height: 80vw;
+            background: radial-gradient(circle, rgba(96, 165, 250, 0.1) 0%, transparent 60%);
+            z-index: -1;
+            animation: pulse 8s infinite alternate ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: translateX(-50%) scale(1); opacity: 0.8; }
+            100% { transform: translateX(-50%) scale(1.05); opacity: 1; }
         }
 
         .header h1 {
-            font-size: 1.8rem;
+            font-size: 2.5rem;
             font-weight: 700;
             background: var(--gradient-brand);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 0.05em;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .header .subtitle {
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
+            font-size: 1.1rem;
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         /* ── Main Layout ── */
         .container {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 0 2rem 4rem;
+        }
+
+        /* ── Glassmorphism Card Base ── */
+        .glass-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 1.75rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, background 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-4px);
+            background: var(--bg-glass-hover);
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.15);
         }
 
         /* ── Stat Cards ── */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+            animation: slideUp 0.8s ease-out backwards;
+            animation-delay: 0.2s;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .stat-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        .stat-card:hover {
-            background: var(--bg-card-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-        }
+        /* Ambient glows for stat cards */
+        .stat-card.total::after { content: ''; position: absolute; top:-20px; right:-20px; width:80px; height:80px; background:var(--accent-blue-glow); filter:blur(40px); border-radius:50%; }
+        .stat-card.positive::after { content: ''; position: absolute; top:-20px; right:-20px; width:80px; height:80px; background:var(--accent-green-glow); filter:blur(40px); border-radius:50%; }
+        .stat-card.negative::after { content: ''; position: absolute; top:-20px; right:-20px; width:80px; height:80px; background:var(--accent-red-glow); filter:blur(40px); border-radius:50%; }
+        .stat-card.neutral::after { content: ''; position: absolute; top:-20px; right:-20px; width:80px; height:80px; background:var(--accent-amber-glow); filter:blur(40px); border-radius:50%; }
 
         .stat-card .label {
-            font-size: 0.75rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             color: var(--text-secondary);
             margin-bottom: 0.5rem;
-        }
-
-        .stat-card .value {
-            font-size: 2rem;
-            font-weight: 700;
-        }
-
-        .stat-card .value.positive { color: var(--accent-green); }
-        .stat-card .value.negative { color: var(--accent-red); }
-        .stat-card .value.neutral { color: var(--accent-amber); }
-        .stat-card .value.total { color: var(--accent-blue); }
-
-        /* ── Section ── */
-        .section {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .section-title {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-card .value {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-card .value.total { color: var(--text-primary); }
+        .stat-card .value.positive { color: var(--accent-green); }
+        .stat-card .value.negative { color: var(--accent-red); }
+        .stat-card .value.neutral { color: var(--accent-amber); }
+
+        .stat-card .pct {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-left: 0.5rem;
+        }
+
+        /* ── Section Titles ── */
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-primary);
         }
 
         /* ── Chart ── */
         .chart-row {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1.5fr;
             gap: 1.5rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2.5rem;
+            animation: slideUp 0.8s ease-out backwards;
+            animation-delay: 0.4s;
         }
 
         .chart-container {
             position: relative;
-            height: 280px;
+            height: 300px;
+            width: 100%;
+        }
+
+        /* ── Search Bar ── */
+        .search-bar-container {
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .search-input {
+            flex: 1;
+            background: rgba(0,0,0,0.2);
+            border: 1px solid var(--border-glass);
+            color: var(--text-primary);
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+            background: rgba(0,0,0,0.4);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-secondary);
         }
 
         /* ── Table ── */
+        .table-section {
+            animation: slideUp 0.8s ease-out backwards;
+            animation-delay: 0.6s;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid var(--border-glass);
+        }
+
         .data-table {
             width: 100%;
             border-collapse: collapse;
+            background: rgba(0,0,0,0.2);
         }
 
         .data-table th,
         .data-table td {
-            padding: 0.75rem 1rem;
+            padding: 1rem 1.25rem;
             text-align: left;
-            border-bottom: 1px solid var(--border);
-            font-size: 0.875rem;
+            border-bottom: 1px solid var(--border-glass);
+            font-size: 0.9rem;
         }
 
         .data-table th {
             color: var(--text-secondary);
             font-weight: 500;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
+            background: rgba(255,255,255,0.02);
+            white-space: nowrap;
         }
 
-        .data-table tr:hover td {
-            background: var(--bg-card-hover);
+        .data-table tr {
+            transition: background 0.2s ease;
+        }
+
+        .data-table tr:hover {
+            background: rgba(255,255,255,0.04);
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
         }
 
         .data-table a {
-            color: var(--accent-blue);
+            color: var(--text-primary);
             text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+            display: inline-block;
+            max-width: 400px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            vertical-align: middle;
         }
 
         .data-table a:hover {
-            text-decoration: underline;
+            color: var(--accent-blue);
+        }
+
+        .source-tag {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
         }
 
         /* ── Badge ── */
         .badge {
-            display: inline-block;
-            padding: 0.2rem 0.6rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.25rem 0.75rem;
             border-radius: 999px;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             font-weight: 600;
             text-transform: uppercase;
+            letter-spacing: 0.05em;
+            backdrop-filter: blur(4px);
         }
 
-        .badge.positive { background: rgba(52,211,153,0.15); color: var(--accent-green); }
-        .badge.negative { background: rgba(248,113,113,0.15); color: var(--accent-red); }
-        .badge.neutral  { background: rgba(251,191,36,0.15);  color: var(--accent-amber); }
+        .badge.positive { background: var(--accent-green-glow); color: #34d399; border: 1px solid rgba(16,185,129,0.3); }
+        .badge.negative { background: var(--accent-red-glow); color: #fb7185; border: 1px solid rgba(244,63,94,0.3); }
+        .badge.neutral  { background: var(--accent-amber-glow);  color: #fbbf24; border: 1px solid rgba(245,158,11,0.3); }
 
-        .badge.new_product   { background: rgba(96,165,250,0.15);  color: var(--accent-blue); }
-        .badge.promotion     { background: rgba(167,139,250,0.15); color: var(--accent-purple); }
-        .badge.pop_up        { background: rgba(52,211,153,0.15);  color: var(--accent-green); }
-        .badge.collaboration { background: rgba(251,191,36,0.15);  color: var(--accent-amber); }
-        .badge.other         { background: rgba(136,136,136,0.15); color: var(--text-secondary); }
+        .badge.new_product   { background: rgba(96,165,250,0.15);  color: #60a5fa; border: 1px solid rgba(96,165,250,0.3); }
+        .badge.promotion     { background: rgba(167,139,250,0.15); color: #a78bfa; border: 1px solid rgba(167,139,250,0.3); }
+        .badge.pop_up        { background: rgba(52,211,153,0.15);  color: #34d399; border: 1px solid rgba(52,211,153,0.3); }
+        .badge.collaboration { background: rgba(251,191,36,0.15);  color: #fbbf24; border: 1px solid rgba(251,191,36,0.3); }
+        .badge.update        { background: rgba(236,72,153,0.15);  color: #f472b6; border: 1px solid rgba(236,72,153,0.3); }
+        .badge.other         { background: rgba(148,163,184,0.15); color: #94a3b8; border: 1px solid rgba(148,163,184,0.3); }
 
         /* ── Event Card ── */
+        .events-section {
+            margin-bottom: 2.5rem;
+            animation: slideUp 0.8s ease-out backwards;
+            animation-delay: 0.5s;
+        }
+
         .event-list {
             display: grid;
-            gap: 0.75rem;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
         }
 
         .event-card {
-            background: var(--bg-primary);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1rem 1.25rem;
-            transition: all 0.2s ease;
+            background: rgba(0,0,0,0.2);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            padding: 1.25rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px; height: 100%;
+            background: var(--gradient-brand);
+            opacity: 0.5;
+            transition: opacity 0.3s;
         }
 
         .event-card:hover {
-            border-color: var(--accent-green);
+            background: rgba(255,255,255,0.03);
+            transform: translateX(4px);
+        }
+        
+        .event-card:hover::before {
+            opacity: 1;
         }
 
         .event-card .event-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
         }
 
         .event-card .event-detail {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            line-height: 1.5;
         }
 
         /* ── Footer ── */
@@ -225,64 +393,67 @@
             text-align: center;
             padding: 2rem;
             color: var(--text-secondary);
-            font-size: 0.75rem;
+            font-size: 0.85rem;
+            animation: fadeIn 1s ease-out backwards;
+            animation-delay: 1s;
         }
 
         /* ── Responsive ── */
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             .chart-row { grid-template-columns: 1fr; }
-            .stats-grid { grid-template-columns: 1fr 1fr; }
-            .container { padding: 1rem; }
         }
 
         /* ── No Data ── */
         .no-data {
             text-align: center;
             color: var(--text-secondary);
-            padding: 2rem;
-            font-size: 0.9rem;
+            padding: 3rem;
+            font-size: 1rem;
+            background: rgba(0,0,0,0.2);
+            border-radius: 12px;
+            border: 1px dashed var(--border-glass);
         }
     </style>
 </head>
 <body>
 
 <header class="header">
-    <h1>🌿 AVEDA 品牌情報日報</h1>
-    <p class="subtitle">{{ date }} ｜ 共分析 {{ total_items }} 筆輿情資料</p>
+    <h1>✨ aespa 情報中心</h1>
+    <p class="subtitle">{{ date }} ｜ 共深入分析 {{ total_items }} 筆全球輿情資料</p>
 </header>
 
 <main class="container">
 
     <!-- ── 摘要統計卡片 ── -->
     <section class="stats-grid" id="stats">
-        <div class="stat-card">
-            <div class="label">📊 總筆數</div>
+        <div class="glass-card stat-card total">
+            <div class="label">📊 總聲量</div>
             <div class="value total">{{ total_items }}</div>
         </div>
-        <div class="stat-card">
-            <div class="label">😊 正面</div>
-            <div class="value positive">{{ positive_count }} <small style="font-size:0.9rem; color:var(--text-secondary);">({{ positive_pct }}%)</small></div>
+        <div class="glass-card stat-card positive">
+            <div class="label">😊 正面迴響</div>
+            <div class="value positive">{{ positive_count }}<span class="pct">({{ positive_pct }}%)</span></div>
         </div>
-        <div class="stat-card">
-            <div class="label">😟 負面</div>
-            <div class="value negative">{{ negative_count }} <small style="font-size:0.9rem; color:var(--text-secondary);">({{ negative_pct }}%)</small></div>
+        <div class="glass-card stat-card negative">
+            <div class="label">😟 負面阻力</div>
+            <div class="value negative">{{ negative_count }}<span class="pct">({{ negative_pct }}%)</span></div>
         </div>
-        <div class="stat-card">
-            <div class="label">😐 中立</div>
-            <div class="value neutral">{{ neutral_count }} <small style="font-size:0.9rem; color:var(--text-secondary);">({{ neutral_pct }}%)</small></div>
+        <div class="glass-card stat-card neutral">
+            <div class="label">😐 中立討論</div>
+            <div class="value neutral">{{ neutral_count }}<span class="pct">({{ neutral_pct }}%)</span></div>
         </div>
     </section>
 
     <!-- ── 圖表區 ── -->
     <section class="chart-row">
-        <div class="section">
-            <h2 class="section-title">📈 情緒分佈</h2>
+        <div class="glass-card">
+            <h2 class="section-title">✨ 情緒分佈</h2>
             <div class="chart-container">
                 <canvas id="sentimentChart"></canvas>
             </div>
         </div>
-        <div class="section">
-            <h2 class="section-title">🔥 熱門關鍵字</h2>
+        <div class="glass-card">
+            <h2 class="section-title">🔥 熱門話題標籤</h2>
             <div class="chart-container">
                 <canvas id="keywordChart"></canvas>
             </div>
@@ -290,76 +461,105 @@
     </section>
 
     <!-- ── 活動列表 ── -->
-    <section class="section" id="events">
-        <h2 class="section-title">🎉 近期活動與事件</h2>
+    <section class="glass-card events-section" id="events">
+        <h2 class="section-title">🚀 近期動態與發布事件</h2>
         {% if events %}
         <div class="event-list">
             {% for event in events %}
             <div class="event-card">
                 <div class="event-header">
-                    <span class="badge {{ event.event_type or 'other' }}">{{ event.event_type or '其他' }}</span>
-                    {% if event.event_date %}<span style="font-size:0.8rem; color:var(--text-secondary);">📅 {{ event.event_date }}</span>{% endif %}
+                    <span class="badge {{ event.event_type or 'other' }}">{{ event.event_type or '事件' }}</span>
+                    {% if event.event_date %}<span style="font-size:0.85rem; color:var(--text-secondary);">📅 {{ event.event_date }}</span>{% endif %}
                 </div>
                 <div class="event-detail">{{ event.event_detail or '（無詳細資訊）' }}</div>
-                {% if event.source_url %}<a href="{{ event.source_url }}" target="_blank" style="font-size:0.75rem; color:var(--accent-blue);">查看來源 →</a>{% endif %}
+                {% if event.source_url %}
+                <div style="margin-top:0.75rem;">
+                <a href="{{ event.source_url }}" target="_blank" style="font-size:0.8rem; color:var(--accent-blue); text-decoration:none; display:inline-flex; align-items:center; gap:4px; border: 1px solid rgba(59,130,246,0.3); padding:4px 10px; border-radius:12px; transition:all 0.2s; background:rgba(59,130,246,0.1);">
+                    閱讀來源 <span>↗</span>
+                </a>
+                </div>
+                {% endif %}
             </div>
             {% endfor %}
         </div>
         {% else %}
-        <div class="no-data">今日未偵測到重大活動或事件。</div>
+        <div class="no-data">今日未偵測到特殊動態。</div>
         {% endif %}
     </section>
 
-    <!-- ── 詳細列表 ── -->
-    <section class="section" id="details">
-        <h2 class="section-title">📋 輿情明細</h2>
+    <!-- ── 詳細列表 (附帶搜尋過濾器) ── -->
+    <section class="glass-card table-section" id="details">
+        <h2 class="section-title">📋 輿情情報庫 Archive</h2>
+        
+        <div class="search-bar-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="🔍 搜尋標題、來源或關鍵字...">
+        </div>
+
         {% if items %}
-        <table class="data-table">
-            <thead>
-                <tr>
-                    <th>情緒</th>
-                    <th>標題</th>
-                    <th>來源</th>
-                    <th>關鍵字</th>
-                    <th>語系</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in items %}
-                <tr>
-                    <td><span class="badge {{ item.sentiment.sentiment }}">{{ item.sentiment.sentiment }}</span></td>
-                    <td><a href="{{ item.collected.url }}" target="_blank">{{ item.collected.title[:60] }}</a></td>
-                    <td>{{ item.collected.source }}</td>
-                    <td>{{ item.collected.keyword }}</td>
-                    <td>{{ item.collected.language | upper }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="data-table" id="dataTable">
+                <thead>
+                    <tr>
+                        <th width="10%">情緒</th>
+                        <th width="45%">標題</th>
+                        <th width="15%">來源平台</th>
+                        <th width="20%">關鍵字</th>
+                        <th width="10%">語系</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr class="data-row">
+                        <td><span class="badge {{ item.sentiment.sentiment }}">{{ item.sentiment.sentiment }}</span></td>
+                        <td>
+                            <a href="{{ item.collected.url }}" target="_blank" title="{{ item.collected.title }}">
+                                {{ item.collected.title[:60] }}
+                            </a>
+                        </td>
+                        <td class="source-tag">{{ item.collected.source }}</td>
+                        <td class="source-tag">{{ item.collected.keyword }}</td>
+                        <td class="source-tag" style="text-transform: uppercase;">{{ item.collected.language }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
         {% else %}
-        <div class="no-data">今日無輿情資料。</div>
+        <div class="no-data">資料庫目前為空。</div>
         {% endif %}
     </section>
 
 </main>
 
 <footer class="footer">
-    AVEDA Brand Intelligence System &copy; {{ date }} ｜ 自動產生報告
+    aespa Supernova Intelligence Engine &copy; {{ date }} ｜ Built for the KWANGYA Network 💿
 </footer>
 
 <script>
     // ── 情緒分佈圓餅圖 ──
     const sentimentCtx = document.getElementById('sentimentChart').getContext('2d');
+    
+    // Gradient definitions
+    const gradientGreen = sentimentCtx.createLinearGradient(0, 0, 0, 300);
+    gradientGreen.addColorStop(0, '#34d399'); gradientGreen.addColorStop(1, '#059669');
+    
+    const gradientRed = sentimentCtx.createLinearGradient(0, 0, 0, 300);
+    gradientRed.addColorStop(0, '#f87171'); gradientRed.addColorStop(1, '#e11d48');
+    
+    const gradientAmber = sentimentCtx.createLinearGradient(0, 0, 0, 300);
+    gradientAmber.addColorStop(0, '#fbbf24'); gradientAmber.addColorStop(1, '#d97706');
+
     new Chart(sentimentCtx, {
         type: 'doughnut',
         data: {
             labels: ['正面', '負面', '中立'],
             datasets: [{
                 data: [{{ positive_count }}, {{ negative_count }}, {{ neutral_count }}],
-                backgroundColor: ['#34d399', '#f87171', '#fbbf24'],
-                borderColor: '#1a1a1a',
-                borderWidth: 3,
-                hoverOffset: 8,
+                backgroundColor: [gradientGreen, gradientRed, gradientAmber],
+                borderColor: '#0a0a0f',
+                borderWidth: 4,
+                hoverOffset: 12,
+                borderRadius: 4
             }]
         },
         options: {
@@ -368,15 +568,29 @@
             plugins: {
                 legend: {
                     position: 'bottom',
-                    labels: { color: '#888', font: { size: 12 }, padding: 16 }
+                    labels: { color: '#e8e8e8', font: { family: 'Outfit', size: 14, weight: 500 }, padding: 24, usePointStyle: true }
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(15, 15, 20, 0.9)',
+                    titleFont: { family: 'Outfit', size: 14 },
+                    bodyFont: { family: 'Outfit', size: 14 },
+                    padding: 12,
+                    cornerRadius: 8,
+                    borderColor: 'rgba(255,255,255,0.1)',
+                    borderWidth: 1
                 }
             },
-            cutout: '60%',
+            cutout: '70%',
+            animation: { animateScale: true, animateRotate: true }
         }
     });
 
     // ── 熱門關鍵字長條圖 ──
     const keywordCtx = document.getElementById('keywordChart').getContext('2d');
+    const gradientBlue = keywordCtx.createLinearGradient(0, 0, 400, 0);
+    gradientBlue.addColorStop(0, 'rgba(6, 182, 212, 0.8)'); // cyan
+    gradientBlue.addColorStop(1, 'rgba(192, 38, 211, 0.8)'); // magenta
+
     new Chart(keywordCtx, {
         type: 'bar',
         data: {
@@ -384,10 +598,11 @@
             datasets: [{
                 label: '提及次數',
                 data: [{% for kw in top_products %}{{ kw.count }}{% if not loop.last %}, {% endif %}{% endfor %}],
-                backgroundColor: 'rgba(52, 211, 153, 0.6)',
-                borderColor: '#34d399',
-                borderWidth: 1,
-                borderRadius: 6,
+                backgroundColor: gradientBlue,
+                borderColor: 'transparent',
+                borderRadius: 8,
+                barThickness: 'flex',
+                maxBarThickness: 32
             }]
         },
         options: {
@@ -395,20 +610,52 @@
             maintainAspectRatio: false,
             indexAxis: 'y',
             plugins: {
-                legend: { display: false }
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: 'rgba(15, 15, 20, 0.9)',
+                    titleFont: { family: 'Outfit', size: 14 },
+                    bodyFont: { family: 'Outfit', size: 14 },
+                    padding: 12,
+                    cornerRadius: 8
+                }
             },
             scales: {
                 x: {
-                    ticks: { color: '#888' },
-                    grid: { color: 'rgba(255,255,255,0.05)' },
+                    ticks: { color: '#94a3b8', font: { family: 'Outfit' } },
+                    grid: { color: 'rgba(255,255,255,0.05)', drawBorder: false },
                 },
                 y: {
-                    ticks: { color: '#888', font: { size: 11 } },
-                    grid: { display: false },
+                    ticks: { color: '#e8e8e8', font: { family: 'Outfit', size: 13, weight: 500 } },
+                    grid: { display: false, drawBorder: false },
                 }
+            },
+            animation: {
+                duration: 1500,
+                easing: 'easeOutQuart'
             }
         }
     });
+
+    // ── 表格搜尋 Archive 過濾器機制 ──
+    const searchInput = document.getElementById('searchInput');
+    const tableRows = document.querySelectorAll('.data-row');
+
+    if (searchInput) {
+        searchInput.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            tableRows.forEach(row => {
+                const rowText = row.textContent.toLowerCase();
+                if(rowText.includes(searchTerm)) {
+                    // Restore original display
+                    row.style.display = '';
+                    row.style.animation = 'fadeIn 0.3s ease-out';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    }
 </script>
 
 </body>

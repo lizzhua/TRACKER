@@ -1,5 +1,5 @@
 """
-AVEDA 品牌情報系統 - 統一設定檔
+aespa 情報系統 - 統一設定檔
 """
 
 import os
@@ -13,39 +13,38 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 TAVILY_API_KEY = os.getenv("TAVILY_API_KEY", "")
 APIFY_API_TOKEN = os.getenv("APIFY_API_TOKEN", "")
 IMESSAGE_RECIPIENT = os.getenv("IMESSAGE_RECIPIENT", "")
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")
+LINE_CHANNEL_ACCESS_TOKEN = os.getenv("LINE_CHANNEL_ACCESS_TOKEN", "")
+LINE_USER_ID = os.getenv("LINE_USER_ID", "")
 
 # ─── 搜尋設定 ───────────────────────────────────────────────
 # 中文關鍵字
 KEYWORDS_ZH = [
-    "AVEDA",
-    "肯夢",
-    "AVEDA 木梳",
-    "AVEDA 蘊活菁華",
-    "AVEDA 洗髮精",
-    "AVEDA 護髮",
-    "AVEDA 純香",
-    "AVEDA 頭皮護理",
-    "AVEDA 新品",
-    "AVEDA 促銷",
+    "aespa",
+    "aespa 回歸",
+    "aespa 演唱會",
+    "Karina",
+    "Winter",
+    "Ningning",
+    "Giselle"
 ]
 
 # 英文關鍵字
 KEYWORDS_EN = [
-    "AVEDA",
-    "AVEDA Invati",
-    "AVEDA Botanical Repair",
-    "AVEDA Shampure",
-    "AVEDA new product",
-    "AVEDA promotion",
-    "AVEDA paddle brush",
-    "AVEDA scalp solutions",
+    "aespa comeback",
+    "aespa tour",
+    "aespa Supernova",
+    "aespa Drama",
+    "aespa members",
+    "aespa live"
 ]
 
 # Tavily 專用關鍵字（精簡版，減少 API 消耗）
 KEYWORDS_TAVILY = [
-    "AVEDA 評價",
-    "AVEDA 新品",
-    "AVEDA 促銷活動"
+    "aespa 最新評價",
+    "aespa 演唱會",
+    "aespa 專輯回歸"
 ]
 
 # SerpAPI 搜尋參數
@@ -74,9 +73,9 @@ GEMINI_MAX_OUTPUT_TOKENS = 2048
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 REPORTS_DIR = os.path.join(DATA_DIR, "reports")
-DB_PATH = os.path.join(DATA_DIR, "aveda.db")
+DB_PATH = os.path.join(DATA_DIR, "aespa_tracker.db")
 LOG_DIR = os.path.join(BASE_DIR, "logs")
-LOG_FILE = os.path.join(LOG_DIR, "aveda.log")
+LOG_FILE = os.path.join(LOG_DIR, "aespa_tracker.log")
 TEMPLATES_DIR = os.path.join(BASE_DIR, "reporter", "templates")
 
 # 確保目錄存在

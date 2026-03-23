@@ -1,5 +1,5 @@
 """
-AVEDA 品牌情報系統 - 網頁內文爬蟲
+aespa 情報系統 - 網頁內文爬蟲
 擷取搜尋結果的完整頁面內文，供 LLM 做更深入分析。
 """
 
@@ -99,7 +99,7 @@ def enrich_items(items: List[CollectedItem]) -> List[CollectedItem]:
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
 
-    test_url = "https://www.aveda.com.tw/"
+    test_url = "https://gemini.google.com/"
     print(f"測試擷取：{test_url}")
     content = scrape_content(test_url)
     if content:

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-AVEDA 品牌情報系統 - 主流程入口 (混合引擎版)
+aespa 情報系統 - 主流程入口 (混合引擎版)
 支援: 
 1. Browser Agent (Playwright + Gemini Vision) 擷取社群(Dcard/Threads)
 2. Tavily AI Search (Tavily API + Gemini Text LLM) 搜尋新聞輿情
@@ -19,7 +19,7 @@ from collector.models import CollectedItem, SentimentResult, EventResult
 from analyzer.sentiment import analyze_sentiments
 from analyzer.event_extractor import extract_events
 from reporter.generator import build_daily_report, generate_html
-from notifier.imessage import notify
+from notifier.telegram import notify
 import json
 
 def load_seen_urls():
@@ -54,7 +54,7 @@ def main(dry_run: bool = False):
     logger = logging.getLogger("main")
     start_time = datetime.now()
     logger.info("=" * 60)
-    logger.info("🌿 AVEDA 品牌情報系統 - 混合引擎版啟動")
+    logger.info("🌿 aespa 情報系統 - 混合引擎版啟動")
     logger.info(f"   日期: {start_time.strftime('%Y-%m-%d %H:%M:%S')}")
     logger.info(f"   Dry run: {dry_run}")
     logger.info("=" * 60)
@@ -88,7 +88,7 @@ def main(dry_run: bool = False):
             for img_path in screenshots:
                 raw_results = extract_from_image(img_path)
                 for r in raw_results:
-                    url = r.get("url", "https://www.aveda.com.tw")
+                    url = r.get("url", "https://gemini.google.com")
                     
                     item = CollectedItem(
                         title=r.get("title", "無標題"),
@@ -96,7 +96,7 @@ def main(dry_run: bool = False):
                         url=url,
                         source=r.get("source", "Unknown"),
                         language=r.get("language", "zh"),
-                        keyword=r.get("keyword", "AVEDA")
+                        keyword=r.get("keyword", "aespa")
                     )
                     
                     try:
@@ -137,12 +137,12 @@ def main(dry_run: bool = False):
                 from analyzer.event_extractor import extract_events
                 
                 tavily_sentiments = analyze_sentiments(tavily_items)
-            tavily_events = extract_events(tavily_items)
-            
-            items.extend(tavily_items)
-            sentiments.extend(tavily_sentiments)
-            events.extend(tavily_events)
-            logger.info(f"   ✅ [引擎B] 完成 {len(tavily_items)} 筆資訊處理")
+                tavily_events = extract_events(tavily_items)
+                
+                items.extend(tavily_items)
+                sentiments.extend(tavily_sentiments)
+                events.extend(tavily_events)
+                logger.info(f"   ✅ [引擎B] 完成 {len(tavily_items)} 筆資訊處理")
 
         # ── 引擎 C: SerpAPI (傳統 Google 搜尋) ───────────────
         if config.SERPAPI_KEY:
@@ -160,12 +160,12 @@ def main(dry_run: bool = False):
                     
                     logger.info(f"   🧠 [引擎C] LLM 正在處理網頁內文...")
                     serp_sentiments = analyze_sentiments(serp_items)
-                serp_events = extract_events(serp_items)
-                
-                items.extend(serp_items)
-                sentiments.extend(serp_sentiments)
-                events.extend(serp_events)
-                logger.info(f"   ✅ [引擎C] 完成 {len(serp_items)} 筆資訊處理")
+                    serp_events = extract_events(serp_items)
+                    
+                    items.extend(serp_items)
+                    sentiments.extend(serp_sentiments)
+                    events.extend(serp_events)
+                    logger.info(f"   ✅ [引擎C] 完成 {len(serp_items)} 筆資訊處理")
 
         # ── 引擎 D: Apify (自動化 Google 採集) ───────────────
         if config.APIFY_API_TOKEN:
@@ -183,12 +183,12 @@ def main(dry_run: bool = False):
                     
                     logger.info(f"   🧠 [引擎D] LLM 正在處理 {len(apify_items)} 筆網頁摘要...")
                     apify_sentiments = analyze_sentiments(apify_items)
-                apify_events = extract_events(apify_items)
-                
-                items.extend(apify_items)
-                sentiments.extend(apify_sentiments)
-                events.extend(apify_events)
-                logger.info(f"   ✅ [引擎D] 完成 {len(apify_items)} 筆資訊處理")
+                    apify_events = extract_events(apify_items)
+                    
+                    items.extend(apify_items)
+                    sentiments.extend(apify_sentiments)
+                    events.extend(apify_events)
+                    logger.info(f"   ✅ [引擎D] 完成 {len(apify_items)} 筆資訊處理")
 
         # ── 驗證結果 ───────────────────────────────────────
         if not items:
@@ -203,17 +203,17 @@ def main(dry_run: bool = False):
 
         # ── Phase 4: 通知 ──────────────────────────────────
         if dry_run:
-            logger.info("📱 [Dry Run] 跳過 iMessage 通知")
-            from notifier.imessage import format_daily_summary
+            logger.info("📱 [Dry Run] 跳過 LINE 通知")
+            from notifier.line import format_daily_summary
             summary = format_daily_summary(report)
             logger.info(f"   訊息預覽:\n{summary}")
         else:
-            logger.info("📱 發送 iMessage 通知...")
+            logger.info("📱 發送 LINE 通知...")
             success = notify(report)
             if success:
-                logger.info("   ✅ 通知發送成功")
+                logger.info("   ✅ LINE 通知發送成功")
             else:
-                logger.error("   ❌ 通知發送失敗")
+                logger.error("   ❌ LINE 通知發送失敗")
 
         # ── 完成 ──────────────────────────────────────────
         save_seen_urls(seen_urls)
@@ -232,7 +232,7 @@ def main(dry_run: bool = False):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="AVEDA 情報系統 - 混合引擎")
+    parser = argparse.ArgumentParser(description="aespa 情報系統 - 混合引擎")
     parser.add_argument("--dry-run", action="store_true", help="不發送 iMessage 通知，僅預覽訊息")
     args = parser.parse_args()
     

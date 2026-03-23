@@ -1,6 +1,6 @@
 """
-AVEDA 品牌情報系統 - 瀏覽器自動截圖模組
-使用 Playwright 直接啟動無頭瀏覽器，前往 Dcard 與 Threads 搜尋頁面並擷取完整長截圖。
+aespa 情報系統 - 瀏覽器自動截圖模組
+使用 Playwright 直接啟動無頭瀏覽器，前往 Threads 搜尋頁面並擷取完整長截圖。
 """
 
 import logging
@@ -14,13 +14,12 @@ logger = logging.getLogger(__name__)
 
 
 def take_screenshots() -> list[str]:
-    """訪問 Threads 和 Dcard，並進行視窗截圖"""
+    """訪問 Threads，並進行視窗截圖"""
     screenshots = []
 
-    # 搜尋目標 URL，我們針對「AVEDA」進行跨平台搜尋
+    # 搜尋目標 URL，我們針對「aespa」進行重點搜尋
     urls = [
-        ("dcard", "https://www.dcard.tw/search?query=AVEDA"),
-        ("threads", "https://www.threads.net/search?q=AVEDA")
+        ("threads", "https://www.threads.net/search?q=aespa")
     ]
 
     os.makedirs(os.path.join(config.DATA_DIR, "screenshots"), exist_ok=True)

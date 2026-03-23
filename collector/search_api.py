@@ -1,5 +1,5 @@
 """
-AVEDA 品牌情報系統 - SerpAPI 搜尋模組
+aespa 情報系統 - SerpAPI 搜尋模組
 透過 SerpAPI 對 Google Search 進行中文關鍵字搜尋 (已精簡)。
 """
 

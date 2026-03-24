@@ -133,8 +133,6 @@ def main(dry_run: bool = False):
             
             if tavily_items:
                 logger.info(f"   取得 {len(tavily_items)} 筆全新結果，進入 LLM 分析...")
-                from analyzer.sentiment import analyze_sentiments
-                from analyzer.event_extractor import extract_events
                 
                 tavily_sentiments = analyze_sentiments(tavily_items)
                 tavily_events = extract_events(tavily_items)

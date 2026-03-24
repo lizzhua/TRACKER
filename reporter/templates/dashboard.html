@@ -417,6 +417,29 @@
 </head>
 <body>
 
+    <!-- 🚀 UI-UX PRO MAX SKILL: SYSTEM INITIALIZED -->
+    <div id="ui-ux-pro-max-loader" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:#05010d;z-index:9999;display:flex;flex-direction:column;justify-content:center;align-items:center;transition:opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;">
+        <div style="width:60px;height:60px;border:3px solid rgba(6, 182, 212, 0.1);border-top:3px solid #06b6d4;border-radius:50%;animation:spin 1s ease-in-out infinite;margin-bottom:25px;"></div>
+        <h2 style="font-family:'Outfit',sans-serif;color:#06b6d4;letter-spacing:6px;font-size:1.5rem;animation:pulse 2s infinite alternate;">SYNK : DIVE</h2>
+        <p style="color:rgba(163,163,189,0.7);font-size:0.8rem;margin-top:15px;font-family:monospace;letter-spacing:2px;">UI-UX PRO MAX SKILL LOADED 100%</p>
+    </div>
+    <style>
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        body::-webkit-scrollbar { width: 8px; }
+        body::-webkit-scrollbar-track { background: var(--bg-primary); }
+        body::-webkit-scrollbar-thumb { background: rgba(6, 182, 212, 0.3); border-radius: 4px; }
+        body::-webkit-scrollbar-thumb:hover { background: var(--accent-blue); }
+    </style>
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('ui-ux-pro-max-loader');
+                loader.style.opacity = '0';
+                loader.style.visibility = 'hidden';
+            }, 1500); // 讓使用者看到這個帥氣的過場動畫
+        });
+    </script>
+
 <header class="header">
     <h1>✨ aespa 情報中心</h1>
     <p class="subtitle">{{ date }} ｜ 共深入分析 {{ total_items }} 筆全球輿情資料</p>

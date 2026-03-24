@@ -417,9 +417,32 @@
 </head>
 <body>
 
+    <!-- 🚀 UI-UX PRO MAX SKILL: SYSTEM INITIALIZED -->
+    <div id="ui-ux-pro-max-loader" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:#05010d;z-index:9999;display:flex;flex-direction:column;justify-content:center;align-items:center;transition:opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;">
+        <div style="width:60px;height:60px;border:3px solid rgba(6, 182, 212, 0.1);border-top:3px solid #06b6d4;border-radius:50%;animation:spin 1s ease-in-out infinite;margin-bottom:25px;"></div>
+        <h2 style="font-family:'Outfit',sans-serif;color:#06b6d4;letter-spacing:6px;font-size:1.5rem;animation:pulse 2s infinite alternate;">SYNK : DIVE</h2>
+        <p style="color:rgba(163,163,189,0.7);font-size:0.8rem;margin-top:15px;font-family:monospace;letter-spacing:2px;">UI-UX PRO MAX SKILL LOADED 100%</p>
+    </div>
+    <style>
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        body::-webkit-scrollbar { width: 8px; }
+        body::-webkit-scrollbar-track { background: var(--bg-primary); }
+        body::-webkit-scrollbar-thumb { background: rgba(6, 182, 212, 0.3); border-radius: 4px; }
+        body::-webkit-scrollbar-thumb:hover { background: var(--accent-blue); }
+    </style>
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('ui-ux-pro-max-loader');
+                loader.style.opacity = '0';
+                loader.style.visibility = 'hidden';
+            }, 1500); // 讓使用者看到這個帥氣的過場動畫
+        });
+    </script>
+
 <header class="header">
     <h1>✨ aespa 情報中心</h1>
-    <p class="subtitle">2026-03-24 ｜ 共深入分析 7 筆全球輿情資料</p>
+    <p class="subtitle">2026-03-24 ｜ 共深入分析 5 筆全球輿情資料</p>
 </header>
 
 <main class="container">
@@ -428,19 +451,19 @@
     <section class="stats-grid" id="stats">
         <div class="glass-card stat-card total">
             <div class="label">📊 總聲量</div>
-            <div class="value total">7</div>
+            <div class="value total">5</div>
         </div>
         <div class="glass-card stat-card positive">
             <div class="label">😊 正面迴響</div>
-            <div class="value positive">4<span class="pct">(57.1%)</span></div>
+            <div class="value positive">3<span class="pct">(60.0%)</span></div>
         </div>
         <div class="glass-card stat-card negative">
             <div class="label">😟 負面阻力</div>
-            <div class="value negative">1<span class="pct">(14.3%)</span></div>
+            <div class="value negative">1<span class="pct">(20.0%)</span></div>
         </div>
         <div class="glass-card stat-card neutral">
             <div class="label">😐 中立討論</div>
-            <div class="value neutral">2<span class="pct">(28.6%)</span></div>
+            <div class="value neutral">1<span class="pct">(20.0%)</span></div>
         </div>
     </section>
 
@@ -504,7 +527,7 @@
                 <div class="event-detail">系統備用分析器：根據內文關鍵字自動辨識之動態。</div>
                 
                 <div style="margin-top:0.75rem;">
-                <a href="https://www.kpopstarz.com/articles/322896/20260313/aespa-confirms-may-comeback-new-album-group-gears-2026-promotions.htm" target="_blank" style="font-size:0.8rem; color:var(--accent-blue); text-decoration:none; display:inline-flex; align-items:center; gap:4px; border: 1px solid rgba(59,130,246,0.3); padding:4px 10px; border-radius:12px; transition:all 0.2s; background:rgba(59,130,246,0.1);">
+                <a href="https://cnakpop.com/blogs/k-updates/is-aespa-coming-back-in-june-2025-heres-what-reports-say" target="_blank" style="font-size:0.8rem; color:var(--accent-blue); text-decoration:none; display:inline-flex; align-items:center; gap:4px; border: 1px solid rgba(59,130,246,0.3); padding:4px 10px; border-radius:12px; transition:all 0.2s; background:rgba(59,130,246,0.1);">
                     閱讀來源 <span>↗</span>
                 </a>
                 </div>
@@ -562,13 +585,13 @@
                     </tr>
                     
                     <tr class="data-row">
-                        <td><span class="badge positive">positive</span></td>
+                        <td><span class="badge neutral">neutral</span></td>
                         <td>
-                            <a href="https://www.kpopstarz.com/articles/322896/20260313/aespa-confirms-may-comeback-new-album-group-gears-2026-promotions.htm" target="_blank" title="Aespa Confirms May Comeback With New Album as Group Gears ...">
-                                Aespa Confirms May Comeback With New Album as Group Gears ..
+                            <a href="https://cnakpop.com/blogs/k-updates/is-aespa-coming-back-in-june-2025-heres-what-reports-say" target="_blank" title="Is Aespa Coming Back in June 2025? Here&#39;s What Reports ...">
+                                Is Aespa Coming Back in June 2025? Here&#39;s What Reports ...
                             </a>
                         </td>
-                        <td class="source-tag">Tavily Search</td>
+                        <td class="source-tag">Apify Google Search</td>
                         <td class="source-tag">aespa comeback</td>
                         <td class="source-tag" style="text-transform: uppercase;">zh</td>
                     </tr>
@@ -594,30 +617,6 @@
                         </td>
                         <td class="source-tag">Apify Google Search</td>
                         <td class="source-tag">aespa 最新評價</td>
-                        <td class="source-tag" style="text-transform: uppercase;">zh</td>
-                    </tr>
-                    
-                    <tr class="data-row">
-                        <td><span class="badge neutral">neutral</span></td>
-                        <td>
-                            <a href="https://www.koreaherald.com/article/10503179" target="_blank" title="aespa announces comeback">
-                                aespa announces comeback
-                            </a>
-                        </td>
-                        <td class="source-tag">Apify Google Search</td>
-                        <td class="source-tag">aespa comeback</td>
-                        <td class="source-tag" style="text-transform: uppercase;">zh</td>
-                    </tr>
-                    
-                    <tr class="data-row">
-                        <td><span class="badge neutral">neutral</span></td>
-                        <td>
-                            <a href="https://cnakpop.com/blogs/k-updates/is-aespa-coming-back-in-june-2025-heres-what-reports-say" target="_blank" title="Is Aespa Coming Back in June 2025? Here&#39;s What Reports ...">
-                                Is Aespa Coming Back in June 2025? Here&#39;s What Reports ...
-                            </a>
-                        </td>
-                        <td class="source-tag">Apify Google Search</td>
-                        <td class="source-tag">aespa comeback</td>
                         <td class="source-tag" style="text-transform: uppercase;">zh</td>
                     </tr>
                     
@@ -652,7 +651,7 @@
         data: {
             labels: ['正面', '負面', '中立'],
             datasets: [{
-                data: [4, 1, 2],
+                data: [3, 1, 1],
                 backgroundColor: [gradientGreen, gradientRed, gradientAmber],
                 borderColor: '#0a0a0f',
                 borderWidth: 4,
@@ -692,10 +691,10 @@
     new Chart(keywordCtx, {
         type: 'bar',
         data: {
-            labels: ['aespa comeback', 'aespa', 'aespa 最新評價'],
+            labels: ['aespa', 'aespa 最新評價', 'aespa comeback'],
             datasets: [{
                 label: '提及次數',
-                data: [3, 2, 2],
+                data: [2, 2, 1],
                 backgroundColor: gradientBlue,
                 borderColor: 'transparent',
                 borderRadius: 8,

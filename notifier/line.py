@@ -154,7 +154,7 @@ if __name__ == "__main__":
             {"keyword": "Winter", "count": 2},
         ],
         events=[
-            {"event_type": "test", "event_title": "連線測試", "event_detail": "恭喜！情報總部的全新 LINE Messaging API 通知已成功連線！", "event_date": "2026-03-23"},
+            {"event_type": "concert", "event_title": "aespa 台北演唱會搶票預熱", "event_detail": "aespa 即將來台開唱，各大社群論壇如 Threads 開始熱烈討論搶票攻略與應援準備！", "event_date": "2026-03-23"},
         ],
         items=[],
     )

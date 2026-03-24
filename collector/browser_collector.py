@@ -19,7 +19,7 @@ def take_screenshots() -> list[str]:
 
     # 搜尋目標 URL，我們針對「aespa」進行重點搜尋
     urls = [
-        ("threads", "https://www.threads.net/search?q=aespa")
+        ("threads", "https://www.threads.net/search?q=aespa&serp_type=real_time")
     ]
 
     os.makedirs(os.path.join(config.DATA_DIR, "screenshots"), exist_ok=True)

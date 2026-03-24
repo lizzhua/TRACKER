@@ -80,14 +80,14 @@ def format_daily_summary(report: DailyReport) -> str:
     # Top 熱門關鍵字
     if report.top_products:
         lines.append(f"")
-        lines.append(f"🚀 <b>KWANGYA 熱議焦點 Top 3：</b>")
+        lines.append(f"🌌 <b>KWANGYA 熱議焦點 Top 3：</b>")
         for kw in report.top_products[:3]:
-            lines.append(f"  • {kw['keyword']} ({kw['count']}次)")
+            lines.append(f"  ✧ {kw['keyword']} ({kw['count']}次)")
 
     # 活動通知或動態
     if report.events:
         lines.append(f"")
-        lines.append(f"⚡ <b>最新系統情報預警：</b>")
+        lines.append(f"🔮 <b>最新系統情報預警：</b>")
         lines.append(f"   攔截到 {len(report.events)} 個近期強烈動態：")
         for event in report.events[:3]:
             title = event.get('event_title') or '社群特別關注'
@@ -95,7 +95,7 @@ def format_daily_summary(report: DailyReport) -> str:
             
             lines.append(f" ✨ <b>{title}</b>")
             if desc:
-                lines.append(f"   <i>{desc[:60]}...</i>")
+                lines.append(f"   ✧ <i>{desc[:60]}...</i>")
 
     # 附上詳細報表網址
     lines.append(f"")

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>aespa情報日報 — {{ date }}</title>
+    <title>🌌 aespa SYNK:情報庫 — {{ date }}</title>
     <meta name="description" content="aespa 品牌每日輿情分析報告，含情緒分析、熱門產品與活動追蹤。">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -441,7 +441,7 @@
     </script>
 
 <header class="header">
-    <h1>✨ aespa 情報中心</h1>
+    <h1>🌌 aespa SYNK: 情報庫</h1>
     <p class="subtitle">{{ date }} ｜ 共深入分析 {{ total_items }} 筆全球輿情資料</p>
 </header>
 
@@ -470,13 +470,13 @@
     <!-- ── 圖表區 ── -->
     <section class="chart-row">
         <div class="glass-card">
-            <h2 class="section-title">✨ 情緒分佈</h2>
+            <h2 class="section-title">🦋 情緒共鳴共振</h2>
             <div class="chart-container">
                 <canvas id="sentimentChart"></canvas>
             </div>
         </div>
         <div class="glass-card">
-            <h2 class="section-title">🚀 熱門話題標籤</h2>
+            <h2 class="section-title">🌠 核心探測網路</h2>
             <div class="chart-container">
                 <canvas id="keywordChart"></canvas>
             </div>
@@ -485,14 +485,14 @@
 
     <!-- ── 活動列表 ── -->
     <section class="glass-card events-section" id="events">
-        <h2 class="section-title">🚀 近期動態與發布事件</h2>
+        <h2 class="section-title">🔮 系統預警與動態事件</h2>
         {% if events %}
         <div class="event-list">
             {% for event in events %}
             <div class="event-card">
                 <div class="event-header">
                     <span class="badge {{ event.event_type or 'other' }}">{{ event.event_type or '事件' }}</span>
-                    {% if event.event_date %}<span style="font-size:0.85rem; color:var(--text-secondary);">⏳ {{ event.event_date }}</span>{% endif %}
+                    {% if event.event_date %}<span style="font-size:0.85rem; color:var(--text-secondary);">⏱️ {{ event.event_date }}</span>{% endif %}
                 </div>
                 <div class="event-detail">{{ event.event_detail or '（無詳細資訊）' }}</div>
                 {% if event.source_url %}
@@ -512,10 +512,10 @@
 
     <!-- ── 詳細列表 (附帶搜尋過濾器) ── -->
     <section class="glass-card table-section" id="details">
-        <h2 class="section-title">📋 輿情情報庫 Archive</h2>
+        <h2 class="section-title">🗄️ 輿情黑盒子 Archive</h2>
         
         <div class="search-bar-container">
-            <input type="text" id="searchInput" class="search-input" placeholder="📡 搜尋標題、來源或關鍵字...">
+            <input type="text" id="searchInput" class="search-input" placeholder="🛰️ 檢索標題、來源或關鍵字...">
         </div>
 
         {% if items %}

@@ -256,6 +256,15 @@ def main(dry_run: bool = False):
         except Exception as e:
             logger.error(f"   ❌ Markdown 備份失敗: {e}")
 
+        # ── Phase 6: GitHub Pages 首頁捷徑 (index.html) ───────
+        try:
+            import shutil
+            root_index = "/Users/ziling/antigravity/index.html"
+            shutil.copy(report_path, root_index)
+            logger.info(f"   ✅ 已將今日最新報表複製為專案首頁 (index.html)")
+        except Exception as e:
+            logger.error(f"   ❌ 首頁生成失敗: {e}")
+
         # ── 完成 ──────────────────────────────────────────
         save_seen_urls(seen_urls)
         

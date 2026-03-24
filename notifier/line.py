@@ -106,9 +106,10 @@ def format_daily_summary(report: DailyReport) -> str:
             if desc:
                 lines.append(f"   {desc[:40]}...")
 
-    # 附上詳細報表提示
+    # 附上詳細報表網址
     lines.append(f"")
-    lines.append(f"🔗 詳細圖表請查看您的本機儀表板 (Dashboard) 報表！")
+    lines.append(f"🔗 點擊下方網址，觀看完整動態圖表與儀表板：")
+    lines.append(f"https://lizzhua.github.io/TRACKER/")
 
     return "\n".join(lines)
 

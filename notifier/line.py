@@ -74,7 +74,7 @@ def format_daily_summary(report: DailyReport) -> str:
 
     lines = [
         f"【🌌 aespa SYNK: 每日情報庫】",
-        f"📅 日期：{report.date}",
+        f"⏳ 日期：{report.date}",
         f"",
         f"💿 本日深度探勘 {report.total_items} 筆最新輿情：",
         f"  🦋 正向: {report.positive_count} 筆 ({pos_pct}%)",
@@ -109,7 +109,7 @@ def format_daily_summary(report: DailyReport) -> str:
 
     # 附上詳細報表網址
     lines.append(f"")
-    lines.append(f"🔗 點擊下方網址，觀看完整動態圖表與儀表板：")
+    lines.append(f"🕸️ 點擊下方網址，觀看完整動態圖表與儀表板：")
     lines.append(f"https://lizzhua.github.io/TRACKER/")
 
     return "\n".join(lines)
@@ -164,6 +164,6 @@ if __name__ == "__main__":
     print("發送測試訊息中...")
     success = notify(test_report)
     if success:
-        print("\n✅ LINE 發送成功！請查看您的手機 LINE。")
+        print("\n💠 LINE 發送成功！請查看您的手機 LINE。")
     else:
-        print("\n❌ 發送失敗，請確認 .env 中的 LINE_CHANNEL_ACCESS_TOKEN 和 LINE_USER_ID 是否正確填入 (請勿包含不當引號)。")
+        print("\n💥 發送失敗，請確認 .env 中的 LINE_CHANNEL_ACCESS_TOKEN 和 LINE_USER_ID 是否正確填入 (請勿包含不當引號)。")

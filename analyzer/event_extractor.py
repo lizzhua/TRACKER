@@ -93,7 +93,7 @@ def extract_events(items: List[CollectedItem]) -> List[EventResult]:
         er = extract_event(item)
         results.append(er)
         if er.has_event:
-            logger.info(f"  → 🎉 發現活動: [{er.event_type}] {er.event_detail}")
+            logger.info(f"  → ⚡ 發現活動: [{er.event_type}] {er.event_detail}")
 
     event_count = sum(1 for r in results if r.has_event)
     logger.info(f"活動萃取完成：發現 {event_count}/{len(results)} 筆包含活動")

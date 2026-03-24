@@ -55,7 +55,7 @@ def extract_from_image(image_path: str) -> List[dict]:
     result = call_llm_json_with_image(VISION_PROMPT, img)
     
     if isinstance(result, list):
-        logger.info(f"✅ 在圖片中辨識到 {len(result)} 篇貼文資料")
+        logger.info(f"💠 在圖片中辨識到 {len(result)} 篇貼文資料")
         return result
     else:
         logger.warning(f"⚠️ 回傳格式不如預期，預計為 list，但得到: {type(result)}")

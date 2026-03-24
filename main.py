@@ -54,7 +54,7 @@ def main(dry_run: bool = False):
     logger = logging.getLogger("main")
     start_time = datetime.now()
     logger.info("=" * 60)
-    logger.info("🌿 aespa 情報系統 - 混合引擎版啟動")
+    logger.info("🌌 aespa 情報系統 - 混合引擎版啟動")
     logger.info(f"   日期: {start_time.strftime('%Y-%m-%d %H:%M:%S')}")
     logger.info(f"   Dry run: {dry_run}")
     logger.info("=" * 60)
@@ -77,12 +77,12 @@ def main(dry_run: bool = False):
             return new_items
 
         # ── 引擎 A: Browser Agent ──────────────────────────
-        logger.info("📸 [引擎A] 啟動 Browser Agent 進行社群長截圖...")
+        logger.info("📟 [引擎A] 啟動 Browser Agent 進行社群長截圖...")
         from collector.browser_collector import take_screenshots
         screenshots = take_screenshots()
 
         if screenshots:
-            logger.info("🧠 [引擎A] LLM Vision 判讀並結構化截圖內容...")
+            logger.info("🌐 [引擎A] LLM Vision 判讀並結構化截圖內容...")
             from analyzer.vision_extractor import extract_from_image
             
             for img_path in screenshots:
@@ -121,7 +121,7 @@ def main(dry_run: bool = False):
                     items.append(item)
                     sentiments.append(sent)
                     events.append(evt)
-            logger.info(f"   ✅ [引擎A] 成功辨識出 {len(screenshots)} 張截圖內的資訊")
+            logger.info(f"   💠 [引擎A] 成功辨識出 {len(screenshots)} 張截圖內的資訊")
 
         # ── 引擎 B: Tavily 搜尋 ────────────────────────────
         logger.info("🌐 [引擎B] 啟動 Tavily AI 搜尋網路輿情...")
@@ -140,7 +140,7 @@ def main(dry_run: bool = False):
                 items.extend(tavily_items)
                 sentiments.extend(tavily_sentiments)
                 events.extend(tavily_events)
-                logger.info(f"   ✅ [引擎B] 完成 {len(tavily_items)} 筆資訊處理")
+                logger.info(f"   💠 [引擎B] 完成 {len(tavily_items)} 筆資訊處理")
 
         # ── 引擎 C: SerpAPI (傳統 Google 搜尋) ───────────────
         if config.SERPAPI_KEY:
@@ -153,21 +153,21 @@ def main(dry_run: bool = False):
                 serp_items = filter_new_items(serp_items)
                 
                 if serp_items:
-                    logger.info("   📄 [引擎C] 正在擷取搜尋結果網頁內文...")
+                    logger.info("   💿 [引擎C] 正在擷取搜尋結果網頁內文...")
                     serp_items = enrich_items(serp_items)
                     
-                    logger.info(f"   🧠 [引擎C] LLM 正在處理網頁內文...")
+                    logger.info(f"   🌐 [引擎C] LLM 正在處理網頁內文...")
                     serp_sentiments = analyze_sentiments(serp_items)
                     serp_events = extract_events(serp_items)
                     
                     items.extend(serp_items)
                     sentiments.extend(serp_sentiments)
                     events.extend(serp_events)
-                    logger.info(f"   ✅ [引擎C] 完成 {len(serp_items)} 筆資訊處理")
+                    logger.info(f"   💠 [引擎C] 完成 {len(serp_items)} 筆資訊處理")
 
         # ── 引擎 D: Apify (自動化 Google 採集) ───────────────
         if config.APIFY_API_TOKEN:
-            logger.info("🤖 [引擎D] 啟動 Apify 雲端無頭 Google 採集...")
+            logger.info("🔘 [引擎D] 啟動 Apify 雲端無頭 Google 採集...")
             from collector.apify_api import collect_apify
             
             apify_items = collect_apify()
@@ -175,18 +175,18 @@ def main(dry_run: bool = False):
                 apify_items = filter_new_items(apify_items)
                 
                 if apify_items:
-                    logger.info("   📄 [引擎D] Apify 擷取了搜尋結果清單...")
+                    logger.info("   💿 [引擎D] Apify 擷取了搜尋結果清單...")
                     # Apify 抓到的是標題與摘要，這通常足以讓 LLM 分析（類似 Tavily）
                     # 為了避免超出 Gemini RPM 限制，我們一樣分批餵給分析器
                     
-                    logger.info(f"   🧠 [引擎D] LLM 正在處理 {len(apify_items)} 筆網頁摘要...")
+                    logger.info(f"   🌐 [引擎D] LLM 正在處理 {len(apify_items)} 筆網頁摘要...")
                     apify_sentiments = analyze_sentiments(apify_items)
                     apify_events = extract_events(apify_items)
                     
                     items.extend(apify_items)
                     sentiments.extend(apify_sentiments)
                     events.extend(apify_events)
-                    logger.info(f"   ✅ [引擎D] 完成 {len(apify_items)} 筆資訊處理")
+                    logger.info(f"   💠 [引擎D] 完成 {len(apify_items)} 筆資訊處理")
 
         # ── 驗證結果 ───────────────────────────────────────
         if not items:
@@ -194,7 +194,7 @@ def main(dry_run: bool = False):
             return
 
         # ── Phase 3: 報告 ──────────────────────────────────
-        logger.info("📊 準備生成 Dashboard 報告...")
+        logger.info("💿 準備生成 Dashboard 報告...")
         report = build_daily_report(items, sentiments, events)
         report_path = generate_html(report)
         logger.info(f"   報告已生成: {report_path}")
@@ -209,9 +209,9 @@ def main(dry_run: bool = False):
             logger.info("📱 發送 LINE 通知...")
             success = notify(report)
             if success:
-                logger.info("   ✅ LINE 通知發送成功")
+                logger.info("   💠 LINE 通知發送成功")
             else:
-                logger.error("   ❌ LINE 通知發送失敗")
+                logger.error("   💥 LINE 通知發送失敗")
 
         # ── Phase 5: 備份 (Vault Backup) ──────────────────────
         logger.info("💾 準備建立每日 Markdown 備份...")
@@ -222,7 +222,7 @@ def main(dry_run: bool = False):
         try:
             md_content = f"# ✨ aespa KWANGYA情報中心\n\n"
             md_content += f"> 🕒 自動備份日期：{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n"
-            md_content += f"## 📊 樞紐數據摘要 ({report.date})\n"
+            md_content += f"## 💿 樞紐數據摘要 ({report.date})\n"
             md_content += f"- 💿 總探索筆數：{report.total_items}\n"
             md_content += f"- 🦋 正向訊號：{report.positive_count}\n"
             md_content += f"- 👾 異常干擾：{report.negative_count}\n"
@@ -250,32 +250,32 @@ def main(dry_run: bool = False):
 
             with open(backup_file, "w", encoding="utf-8") as f:
                 f.write(md_content)
-            logger.info(f"   ✅ 已成功更新 Markdown 備份至: {backup_file}")
+            logger.info(f"   💠 已成功更新 Markdown 備份至: {backup_file}")
         except Exception as e:
-            logger.error(f"   ❌ Markdown 備份失敗: {e}")
+            logger.error(f"   💥 Markdown 備份失敗: {e}")
 
         # ── Phase 6: GitHub Pages 首頁捷徑 (index.html) ───────
         try:
             import shutil
             root_index = "/Users/ziling/antigravity/index.html"
             shutil.copy(report_path, root_index)
-            logger.info(f"   ✅ 已將今日最新報表複製為專案首頁 (index.html)")
+            logger.info(f"   💠 已將今日最新報表複製為專案首頁 (index.html)")
         except Exception as e:
-            logger.error(f"   ❌ 首頁生成失敗: {e}")
+            logger.error(f"   💥 首頁生成失敗: {e}")
 
         # ── 完成 ──────────────────────────────────────────
         save_seen_urls(seen_urls)
         
         elapsed = (datetime.now() - start_time).total_seconds()
         logger.info("=" * 60)
-        logger.info(f"✅ 全部流程完成！耗時 {elapsed:.1f} 秒")
+        logger.info(f"💠 全部流程完成！耗時 {elapsed:.1f} 秒")
         logger.info(f"   分析總計: {len(items)} 篇貼文/文章")
         logger.info(f"   正面: {report.positive_count} | 負面: {report.negative_count} | 中立: {report.neutral_count}")
         logger.info(f"   報告路徑: {report_path}")
         logger.info("=" * 60)
 
     except Exception as e:
-        logger.exception(f"❌ 執行過程發生錯誤: {e}")
+        logger.exception(f"💥 執行過程發生錯誤: {e}")
         sys.exit(1)
 
 

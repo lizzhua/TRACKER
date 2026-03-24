@@ -56,10 +56,10 @@ def take_screenshots() -> list[str]:
                 # 針對整個網頁進行長截圖
                 page.screenshot(path=filepath, full_page=True)
                 screenshots.append(filepath)
-                logger.info(f"✅ 截圖已儲存: {filepath}")
+                logger.info(f"💠 截圖已儲存: {filepath}")
 
             except Exception as e:
-                logger.error(f"❌ 擷取 {name} ({url}) 時發生錯誤: {e}")
+                logger.error(f"💥 擷取 {name} ({url}) 時發生錯誤: {e}")
 
         browser.close()
 

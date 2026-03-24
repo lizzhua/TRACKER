@@ -74,12 +74,12 @@ def format_daily_summary(report: DailyReport) -> str:
     neg_pct = round(report.negative_count / total * 100)
 
     lines = [
-        f"🌿 aespa 每日情報 — {report.date}",
+        f"🌌 aespa 每日情報 — {report.date}",
         f"",
-        f"📊 分析 {report.total_items} 筆輿情：",
-        f"  😊 正面 {report.positive_count} 筆 ({pos_pct}%)",
-        f"  😟 負面 {report.negative_count} 筆 ({neg_pct}%)",
-        f"  😐 中立 {report.neutral_count} 筆",
+        f"💿 分析 {report.total_items} 筆輿情：",
+        f"  🦋 正面 {report.positive_count} 筆 ({pos_pct}%)",
+        f"  👾 負面 {report.negative_count} 筆 ({neg_pct}%)",
+        f"  🪐 中立 {report.neutral_count} 筆",
     ]
 
     # 負面預警
@@ -90,14 +90,14 @@ def format_daily_summary(report: DailyReport) -> str:
     # Top 產品
     if report.top_products:
         lines.append(f"")
-        lines.append(f"🔥 熱門關鍵字：")
+        lines.append(f"🚀 熱門關鍵字：")
         for kw in report.top_products[:3]:
             lines.append(f"  • {kw['keyword']} ({kw['count']}次)")
 
     # 活動通知
     if report.events:
         lines.append(f"")
-        lines.append(f"🎉 偵測到 {len(report.events)} 個活動/事件：")
+        lines.append(f"⚡ 偵測到 {len(report.events)} 個活動/事件：")
         for event in report.events[:3]:
             # 防呆：確保文字不是 None
             title = event.get('event_title') or '未命名活動'

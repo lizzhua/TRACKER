@@ -99,7 +99,7 @@ def format_daily_summary(report: DailyReport) -> str:
 
     # 附上詳細報表網址
     lines.append(f"")
-    lines.append(f"🔗 <b>點擊下方網址，觀看完整動態圖表與儀表板：</b>")
+    lines.append(f"🕸️ <b>點擊下方網址，觀看完整動態圖表與儀表板：</b>")
     lines.append(f"https://lizzhua.github.io/TRACKER/")
 
     return "\n".join(lines)
@@ -154,6 +154,6 @@ if __name__ == "__main__":
     print("發送測試訊息中...")
     success = notify(test_report)
     if success:
-        print("\n✅ Telegram 發送成功！請查看您的手機 Telegram。")
+        print("\n💠 Telegram 發送成功！請查看您的手機 Telegram。")
     else:
-        print("\n❌ 發送失敗，請確認 .env 中的 TELEGRAM_BOT_TOKEN 和 TELEGRAM_CHAT_ID 是否正確。")
+        print("\n💥 發送失敗，請確認 .env 中的 TELEGRAM_BOT_TOKEN 和 TELEGRAM_CHAT_ID 是否正確。")

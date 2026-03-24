@@ -476,7 +476,7 @@
             </div>
         </div>
         <div class="glass-card">
-            <h2 class="section-title">🔥 熱門話題標籤</h2>
+            <h2 class="section-title">🚀 熱門話題標籤</h2>
             <div class="chart-container">
                 <canvas id="keywordChart"></canvas>
             </div>
@@ -492,7 +492,7 @@
             <div class="event-card">
                 <div class="event-header">
                     <span class="badge {{ event.event_type or 'other' }}">{{ event.event_type or '事件' }}</span>
-                    {% if event.event_date %}<span style="font-size:0.85rem; color:var(--text-secondary);">📅 {{ event.event_date }}</span>{% endif %}
+                    {% if event.event_date %}<span style="font-size:0.85rem; color:var(--text-secondary);">⏳ {{ event.event_date }}</span>{% endif %}
                 </div>
                 <div class="event-detail">{{ event.event_detail or '（無詳細資訊）' }}</div>
                 {% if event.source_url %}
@@ -515,7 +515,7 @@
         <h2 class="section-title">📋 輿情情報庫 Archive</h2>
         
         <div class="search-bar-container">
-            <input type="text" id="searchInput" class="search-input" placeholder="🔍 搜尋標題、來源或關鍵字...">
+            <input type="text" id="searchInput" class="search-input" placeholder="📡 搜尋標題、來源或關鍵字...">
         </div>
 
         {% if items %}

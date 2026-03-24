@@ -64,35 +64,36 @@ def format_daily_summary(report: DailyReport) -> str:
 
     # 運用 HTML 標籤讓主旨更明顯 (<b> 粗體, <i> 斜體 等)
     lines = [
-        f"<b>aespa KWANGYA 每日情報 — {report.date}</b>",
+        f"<b>🌌 aespa SYNK: 每日情報庫 — {report.date}</b>",
         f"",
-        f"📊 <b>分析 {report.total_items} 筆最新網路輿情：</b>",
-        f"  🟢 <b>正面</b> {report.positive_count} 筆 (<i>{pos_pct}%</i>)",
-        f"  🔴 <b>負面</b> {report.negative_count} 筆 (<i>{neg_pct}%</i>)",
-        f"  ⚪ <b>中立</b> {report.neutral_count} 筆",
+        f"💿 <b>深度探勘 {report.total_items} 筆最新輿情：</b>",
+        f"  🦋 <b>正向</b> {report.positive_count} 筆 (<i>{pos_pct}%</i>)",
+        f"  👾 <b>異常</b> {report.negative_count} 筆 (<i>{neg_pct}%</i>)",
+        f"  🪐 <b>中立</b> {report.neutral_count} 筆",
     ]
 
     # 負面預警
     if report.negative_count > 0:
         lines.append(f"")
-        lines.append(f"⚠️ <b>偵測到 {report.negative_count} 筆負面輿情或飯圈爭議，請密切關注！</b>")
+        lines.append(f"⚠️ <b>系統異狀：偵測到 {report.negative_count} 筆黑粉攻擊或爭議，請提高警覺！</b>")
 
     # Top 熱門關鍵字
     if report.top_products:
         lines.append(f"")
-        lines.append(f"🔥 <b>社群熱門關鍵字 Top 3：</b>")
+        lines.append(f"🚀 <b>KWANGYA 熱議焦點 Top 3：</b>")
         for kw in report.top_products[:3]:
             lines.append(f"  • {kw['keyword']} ({kw['count']}次)")
 
     # 活動通知或動態
     if report.events:
         lines.append(f"")
-        lines.append(f"🎉 <b>偵測到 {len(report.events)} 個近期動態/事件：</b>")
+        lines.append(f"⚡ <b>最新系統情報預警：</b>")
+        lines.append(f"   攔截到 {len(report.events)} 個近期強烈動態：")
         for event in report.events[:3]:
             title = event.get('event_title') or '社群特別關注'
             desc = event.get('event_description') or event.get('event_detail') or ''
             
-            lines.append(f"🔸 <b>{title}</b>")
+            lines.append(f" ✨ <b>{title}</b>")
             if desc:
                 lines.append(f"   <i>{desc[:60]}...</i>")
 

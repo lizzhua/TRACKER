@@ -442,7 +442,7 @@
 
 <header class="header">
     <h1>✨ aespa 情報中心</h1>
-    <p class="subtitle">2026-03-24 ｜ 共深入分析 3 筆全球輿情資料</p>
+    <p class="subtitle">2026-03-24 ｜ 共深入分析 4 筆全球輿情資料</p>
 </header>
 
 <main class="container">
@@ -450,20 +450,20 @@
     <!-- ── 摘要統計卡片 ── -->
     <section class="stats-grid" id="stats">
         <div class="glass-card stat-card total">
-            <div class="label">📊 總聲量</div>
-            <div class="value total">3</div>
+            <div class="label">💿 總資料探勘</div>
+            <div class="value total">4</div>
         </div>
         <div class="glass-card stat-card positive">
-            <div class="label">😊 正面迴響</div>
-            <div class="value positive">2<span class="pct">(66.7%)</span></div>
+            <div class="label">🦋 正向訊號</div>
+            <div class="value positive">3<span class="pct">(75.0%)</span></div>
         </div>
         <div class="glass-card stat-card negative">
-            <div class="label">😟 負面阻力</div>
+            <div class="label">👾 異常干擾</div>
             <div class="value negative">0<span class="pct">(0.0%)</span></div>
         </div>
         <div class="glass-card stat-card neutral">
-            <div class="label">😐 中立討論</div>
-            <div class="value neutral">1<span class="pct">(33.3%)</span></div>
+            <div class="label">🪐 中立資訊</div>
+            <div class="value neutral">1<span class="pct">(25.0%)</span></div>
         </div>
     </section>
 
@@ -521,13 +521,13 @@
             
             <div class="event-card">
                 <div class="event-header">
-                    <span class="badge collaboration">collaboration</span>
+                    <span class="badge new_product">new_product</span>
                     <span style="font-size:0.85rem; color:var(--text-secondary);">📅 2026-03-23</span>
                 </div>
                 <div class="event-detail">系統備用分析器：根據內文關鍵字自動辨識之動態。</div>
                 
                 <div style="margin-top:0.75rem;">
-                <a href="https://kprofiles.com/aespa-discography/" target="_blank" style="font-size:0.8rem; color:var(--accent-blue); text-decoration:none; display:inline-flex; align-items:center; gap:4px; border: 1px solid rgba(59,130,246,0.3); padding:4px 10px; border-radius:12px; transition:all 0.2s; background:rgba(59,130,246,0.1);">
+                <a href="https://www.instagram.com/p/DVz7KinE1zL/" target="_blank" style="font-size:0.8rem; color:var(--accent-blue); text-decoration:none; display:inline-flex; align-items:center; gap:4px; border: 1px solid rgba(59,130,246,0.3); padding:4px 10px; border-radius:12px; transition:all 0.2s; background:rgba(59,130,246,0.1);">
                     閱讀來源 <span>↗</span>
                 </a>
                 </div>
@@ -587,12 +587,24 @@
                     <tr class="data-row">
                         <td><span class="badge neutral">neutral</span></td>
                         <td>
-                            <a href="https://kprofiles.com/aespa-discography/" target="_blank" title="aespa Discography (Updated!)">
-                                aespa Discography (Updated!)
+                            <a href="https://www.instagram.com/p/DVz7KinE1zL/" target="_blank" title="aespa (@aespa_official) is reportedly making a comeback ...">
+                                aespa (@aespa_official) is reportedly making a comeback ...
                             </a>
                         </td>
                         <td class="source-tag">Apify Google Search</td>
                         <td class="source-tag">aespa comeback</td>
+                        <td class="source-tag" style="text-transform: uppercase;">zh</td>
+                    </tr>
+                    
+                    <tr class="data-row">
+                        <td><span class="badge positive">positive</span></td>
+                        <td>
+                            <a href="https://style.udn.com/style/story/8065/9399061?from=udn-catenewnews_ch2002" target="_blank" title="一吃就停不下來！aespa「狂喝喜茶變吃播現場」AI女團爆改 ...">
+                                一吃就停不下來！aespa「狂喝喜茶變吃播現場」AI女團爆改 ...
+                            </a>
+                        </td>
+                        <td class="source-tag">Apify Google Search</td>
+                        <td class="source-tag">aespa 最新評價</td>
                         <td class="source-tag" style="text-transform: uppercase;">zh</td>
                     </tr>
                     
@@ -627,7 +639,7 @@
         data: {
             labels: ['正面 (Positive)', '負面 (Negative)', '中立 (Neutral)'],
             datasets: [{
-                data: [2, 0, 1],
+                data: [3, 0, 1],
                 backgroundColor: [gradientCyan, gradientMagenta, gradientSilver],
                 borderColor: '#0a0a0f',
                 borderWidth: 4,
@@ -667,10 +679,10 @@
     new Chart(keywordCtx, {
         type: 'bar',
         data: {
-            labels: ['aespa', 'aespa comeback'],
+            labels: ['aespa', 'aespa comeback', 'aespa 最新評價'],
             datasets: [{
                 label: '提及次數',
-                data: [2, 1],
+                data: [2, 1, 1],
                 backgroundColor: gradientBlue,
                 borderColor: 'transparent',
                 borderRadius: 8,

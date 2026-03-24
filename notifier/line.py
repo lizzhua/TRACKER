@@ -73,36 +73,37 @@ def format_daily_summary(report: DailyReport) -> str:
     neg_pct = round(report.negative_count / total * 100)
 
     lines = [
-        f"【aespa KWANGYA 每日情報】",
+        f"【🌌 aespa SYNK: 每日情報庫】",
         f"📅 日期：{report.date}",
         f"",
-        f"📊 本日分析 {report.total_items} 筆最新網路輿情：",
-        f"  🟢 正面: {report.positive_count} 筆 ({pos_pct}%)",
-        f"  🔴 負面: {report.negative_count} 筆 ({neg_pct}%)",
-        f"  ⚪ 中立: {report.neutral_count} 筆",
+        f"💿 本日深度探勘 {report.total_items} 筆最新輿情：",
+        f"  🦋 正向: {report.positive_count} 筆 ({pos_pct}%)",
+        f"  👾 異常: {report.negative_count} 筆 ({neg_pct}%)",
+        f"  🪐 中立: {report.neutral_count} 筆",
     ]
 
     # 負面預警
     if report.negative_count > 0:
         lines.append(f"")
-        lines.append(f"⚠️ 預警：偵測到 {report.negative_count} 筆負面輿情或飯圈爭議，請密切關注！")
+        lines.append(f"⚠️ 系統異狀：偵測到 {report.negative_count} 筆黑粉攻擊或爭議，請提高警覺！")
 
     # Top 熱門關鍵字
     if report.top_products:
         lines.append(f"")
-        lines.append(f"🔥 社群熱門關鍵字 Top 3：")
+        lines.append(f"🚀 KWANGYA 熱議焦點 Top 3：")
         for kw in report.top_products[:3]:
             lines.append(f"  • {kw['keyword']} ({kw['count']}次)")
 
     # 活動通知或動態
     if report.events:
         lines.append(f"")
-        lines.append(f"🎉 偵測到 {len(report.events)} 個近期動態/事件：")
+        lines.append(f"⚡ 最新系統情報預警：")
+        lines.append(f"   攔截到 {len(report.events)} 個近期強烈動態：")
         for event in report.events[:3]:
             title = event.get('event_title') or '社群特別關注'
             desc = event.get('event_description') or event.get('event_detail') or ''
             
-            lines.append(f"🔸 {title}")
+            lines.append(f" ✨ {title}")
             if desc:
                 lines.append(f"   {desc[:40]}...")
 

@@ -222,20 +222,20 @@ def main(dry_run: bool = False):
         try:
             md_content = f"# ✨ aespa KWANGYA情報中心\n\n"
             md_content += f"> 🕒 自動備份日期：{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n"
-            md_content += f"## 📊 數據摘要 ({report.date})\n"
-            md_content += f"- 🔍 總探索筆數：{report.total_items}\n"
-            md_content += f"- 🟢 正面評價：{report.positive_count}\n"
-            md_content += f"- 🔴 負面評價：{report.negative_count}\n"
-            md_content += f"- ⚪ 中立評價：{report.neutral_count}\n\n"
+            md_content += f"## 📊 樞紐數據摘要 ({report.date})\n"
+            md_content += f"- 💿 總探索筆數：{report.total_items}\n"
+            md_content += f"- 🦋 正向訊號：{report.positive_count}\n"
+            md_content += f"- 👾 異常干擾：{report.negative_count}\n"
+            md_content += f"- 🪐 中立資訊：{report.neutral_count}\n\n"
             
             if report.top_products:
-                md_content += f"## 🔥 社群熱門關鍵字\n"
+                md_content += f"## 🚀 KWANGYA 熱門話題\n"
                 for kw in report.top_products[:5]:
                     md_content += f"- **{kw['keyword']}** ({kw['count']} 次)\n"
                 md_content += "\n"
                 
             if report.events:
-                md_content += f"## 🎉 近期動態 / 社群話題\n"
+                md_content += f"## ⚡ 最新系統情報預警\n"
                 for ev in report.events:
                     title = ev.get('event_title') or '社群動態'
                     desc = ev.get('event_description') or ev.get('event_detail') or ''

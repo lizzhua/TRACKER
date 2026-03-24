@@ -442,7 +442,7 @@
 
 <header class="header">
     <h1>✨ aespa 情報中心</h1>
-    <p class="subtitle">2026-03-24 ｜ 共深入分析 5 筆全球輿情資料</p>
+    <p class="subtitle">2026-03-24 ｜ 共深入分析 3 筆全球輿情資料</p>
 </header>
 
 <main class="container">
@@ -451,19 +451,19 @@
     <section class="stats-grid" id="stats">
         <div class="glass-card stat-card total">
             <div class="label">📊 總聲量</div>
-            <div class="value total">5</div>
+            <div class="value total">3</div>
         </div>
         <div class="glass-card stat-card positive">
             <div class="label">😊 正面迴響</div>
-            <div class="value positive">3<span class="pct">(60.0%)</span></div>
+            <div class="value positive">2<span class="pct">(66.7%)</span></div>
         </div>
         <div class="glass-card stat-card negative">
             <div class="label">😟 負面阻力</div>
-            <div class="value negative">1<span class="pct">(20.0%)</span></div>
+            <div class="value negative">0<span class="pct">(0.0%)</span></div>
         </div>
         <div class="glass-card stat-card neutral">
             <div class="label">😐 中立討論</div>
-            <div class="value neutral">1<span class="pct">(20.0%)</span></div>
+            <div class="value neutral">1<span class="pct">(33.3%)</span></div>
         </div>
     </section>
 
@@ -521,13 +521,13 @@
             
             <div class="event-card">
                 <div class="event-header">
-                    <span class="badge new_product">new_product</span>
+                    <span class="badge collaboration">collaboration</span>
                     <span style="font-size:0.85rem; color:var(--text-secondary);">📅 2026-03-23</span>
                 </div>
                 <div class="event-detail">系統備用分析器：根據內文關鍵字自動辨識之動態。</div>
                 
                 <div style="margin-top:0.75rem;">
-                <a href="https://cnakpop.com/blogs/k-updates/is-aespa-coming-back-in-june-2025-heres-what-reports-say" target="_blank" style="font-size:0.8rem; color:var(--accent-blue); text-decoration:none; display:inline-flex; align-items:center; gap:4px; border: 1px solid rgba(59,130,246,0.3); padding:4px 10px; border-radius:12px; transition:all 0.2s; background:rgba(59,130,246,0.1);">
+                <a href="https://kprofiles.com/aespa-discography/" target="_blank" style="font-size:0.8rem; color:var(--accent-blue); text-decoration:none; display:inline-flex; align-items:center; gap:4px; border: 1px solid rgba(59,130,246,0.3); padding:4px 10px; border-radius:12px; transition:all 0.2s; background:rgba(59,130,246,0.1);">
                     閱讀來源 <span>↗</span>
                 </a>
                 </div>
@@ -587,36 +587,12 @@
                     <tr class="data-row">
                         <td><span class="badge neutral">neutral</span></td>
                         <td>
-                            <a href="https://cnakpop.com/blogs/k-updates/is-aespa-coming-back-in-june-2025-heres-what-reports-say" target="_blank" title="Is Aespa Coming Back in June 2025? Here&#39;s What Reports ...">
-                                Is Aespa Coming Back in June 2025? Here&#39;s What Reports ...
+                            <a href="https://kprofiles.com/aespa-discography/" target="_blank" title="aespa Discography (Updated!)">
+                                aespa Discography (Updated!)
                             </a>
                         </td>
                         <td class="source-tag">Apify Google Search</td>
                         <td class="source-tag">aespa comeback</td>
-                        <td class="source-tag" style="text-transform: uppercase;">zh</td>
-                    </tr>
-                    
-                    <tr class="data-row">
-                        <td><span class="badge negative">negative</span></td>
-                        <td>
-                            <a href="https://www.reddit.com/r/kpopthoughts/comments/1inulpa/honest_thoughts_of_aespas_newark_concert_pros_cons/?tl=zh-hant" target="_blank" title="aespa紐瓦克演唱會的真心話（優缺點） : r/kpopthoughts">
-                                aespa紐瓦克演唱會的真心話（優缺點） : r/kpopthoughts
-                            </a>
-                        </td>
-                        <td class="source-tag">Apify Google Search</td>
-                        <td class="source-tag">aespa 最新評價</td>
-                        <td class="source-tag" style="text-transform: uppercase;">zh</td>
-                    </tr>
-                    
-                    <tr class="data-row">
-                        <td><span class="badge positive">positive</span></td>
-                        <td>
-                            <a href="https://www.kagit.kr/posts/153795" target="_blank" title="SM都只捧Karina？從solo曲看aespa人氣差距有多大？粉卻認">
-                                SM都只捧Karina？從solo曲看aespa人氣差距有多大？粉卻認
-                            </a>
-                        </td>
-                        <td class="source-tag">Apify Google Search</td>
-                        <td class="source-tag">aespa 最新評價</td>
                         <td class="source-tag" style="text-transform: uppercase;">zh</td>
                     </tr>
                     
@@ -636,23 +612,23 @@
     // ── 情緒分佈圓餅圖 ──
     const sentimentCtx = document.getElementById('sentimentChart').getContext('2d');
     
-    // Gradient definitions
-    const gradientGreen = sentimentCtx.createLinearGradient(0, 0, 0, 300);
-    gradientGreen.addColorStop(0, '#34d399'); gradientGreen.addColorStop(1, '#059669');
+    // Gradient definitions (aespa Theme)
+    const gradientCyan = sentimentCtx.createLinearGradient(0, 0, 0, 300);
+    gradientCyan.addColorStop(0, '#67e8f9'); gradientCyan.addColorStop(1, '#06b6d4');
     
-    const gradientRed = sentimentCtx.createLinearGradient(0, 0, 0, 300);
-    gradientRed.addColorStop(0, '#f87171'); gradientRed.addColorStop(1, '#e11d48');
+    const gradientMagenta = sentimentCtx.createLinearGradient(0, 0, 0, 300);
+    gradientMagenta.addColorStop(0, '#f0abfc'); gradientMagenta.addColorStop(1, '#c026d3');
     
-    const gradientAmber = sentimentCtx.createLinearGradient(0, 0, 0, 300);
-    gradientAmber.addColorStop(0, '#fbbf24'); gradientAmber.addColorStop(1, '#d97706');
+    const gradientSilver = sentimentCtx.createLinearGradient(0, 0, 0, 300);
+    gradientSilver.addColorStop(0, '#cbd5e1'); gradientSilver.addColorStop(1, '#475569');
 
     new Chart(sentimentCtx, {
         type: 'doughnut',
         data: {
-            labels: ['正面', '負面', '中立'],
+            labels: ['正面 (Positive)', '負面 (Negative)', '中立 (Neutral)'],
             datasets: [{
-                data: [3, 1, 1],
-                backgroundColor: [gradientGreen, gradientRed, gradientAmber],
+                data: [2, 0, 1],
+                backgroundColor: [gradientCyan, gradientMagenta, gradientSilver],
                 borderColor: '#0a0a0f',
                 borderWidth: 4,
                 hoverOffset: 12,
@@ -691,10 +667,10 @@
     new Chart(keywordCtx, {
         type: 'bar',
         data: {
-            labels: ['aespa', 'aespa 最新評價', 'aespa comeback'],
+            labels: ['aespa', 'aespa comeback'],
             datasets: [{
                 label: '提及次數',
-                data: [2, 2, 1],
+                data: [2, 1],
                 backgroundColor: gradientBlue,
                 borderColor: 'transparent',
                 borderRadius: 8,

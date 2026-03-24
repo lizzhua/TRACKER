@@ -562,23 +562,23 @@
     // ── 情緒分佈圓餅圖 ──
     const sentimentCtx = document.getElementById('sentimentChart').getContext('2d');
     
-    // Gradient definitions
-    const gradientGreen = sentimentCtx.createLinearGradient(0, 0, 0, 300);
-    gradientGreen.addColorStop(0, '#34d399'); gradientGreen.addColorStop(1, '#059669');
+    // Gradient definitions (aespa Theme)
+    const gradientCyan = sentimentCtx.createLinearGradient(0, 0, 0, 300);
+    gradientCyan.addColorStop(0, '#67e8f9'); gradientCyan.addColorStop(1, '#06b6d4');
     
-    const gradientRed = sentimentCtx.createLinearGradient(0, 0, 0, 300);
-    gradientRed.addColorStop(0, '#f87171'); gradientRed.addColorStop(1, '#e11d48');
+    const gradientMagenta = sentimentCtx.createLinearGradient(0, 0, 0, 300);
+    gradientMagenta.addColorStop(0, '#f0abfc'); gradientMagenta.addColorStop(1, '#c026d3');
     
-    const gradientAmber = sentimentCtx.createLinearGradient(0, 0, 0, 300);
-    gradientAmber.addColorStop(0, '#fbbf24'); gradientAmber.addColorStop(1, '#d97706');
+    const gradientSilver = sentimentCtx.createLinearGradient(0, 0, 0, 300);
+    gradientSilver.addColorStop(0, '#cbd5e1'); gradientSilver.addColorStop(1, '#475569');
 
     new Chart(sentimentCtx, {
         type: 'doughnut',
         data: {
-            labels: ['正面', '負面', '中立'],
+            labels: ['正面 (Positive)', '負面 (Negative)', '中立 (Neutral)'],
             datasets: [{
                 data: [{{ positive_count }}, {{ negative_count }}, {{ neutral_count }}],
-                backgroundColor: [gradientGreen, gradientRed, gradientAmber],
+                backgroundColor: [gradientCyan, gradientMagenta, gradientSilver],
                 borderColor: '#0a0a0f',
                 borderWidth: 4,
                 hoverOffset: 12,

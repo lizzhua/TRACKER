@@ -3,6 +3,6 @@ __pycache__/
 *.pyc
 venv/
 data/aespa_tracker.db
-data/reports/
+
 logs/
 .DS_Store

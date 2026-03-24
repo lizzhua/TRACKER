@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVEDA 品牌情報日報 — 2026-03-22</title>
+    <meta name="description" content="AVEDA 品牌每日輿情分析報告，含情緒分析、熱門產品與活動追蹤。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --bg-primary: #0f0f0f;
+            --bg-card: #1a1a1a;
+            --bg-card-hover: #222222;
+            --border: #2a2a2a;
+            --text-primary: #e8e8e8;
+            --text-secondary: #888888;
+            --accent-green: #34d399;
+            --accent-red: #f87171;
+            --accent-amber: #fbbf24;
+            --accent-blue: #60a5fa;
+            --accent-purple: #a78bfa;
+            --gradient-brand: linear-gradient(135deg, #34d399, #059669);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', 'Noto Sans TC', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* ── Header ── */
+        .header {
+            background: linear-gradient(135deg, #0a1a0f 0%, #0f2518 50%, #0a1a0f 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 2.5rem 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--gradient-brand);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 0.05em;
+        }
+
+        .header .subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* ── Main Layout ── */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* ── Stat Cards ── */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            background: var(--bg-card-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+
+        .stat-card .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card .value {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .stat-card .value.positive { color: var(--accent-green); }
+        .stat-card .value.negative { color: var(--accent-red); }
+        .stat-card .value.neutral { color: var(--accent-amber); }
+        .stat-card .value.total { color: var(--accent-blue); }
+
+        /* ── Section ── */
+        .section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* ── Chart ── */
+        .chart-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 280px;
+        }
+
+        /* ── Table ── */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.875rem;
+        }
+
+        .data-table th {
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .data-table tr:hover td {
+            background: var(--bg-card-hover);
+        }
+
+        .data-table a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+
+        .data-table a:hover {
+            text-decoration: underline;
+        }
+
+        /* ── Badge ── */
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge.positive { background: rgba(52,211,153,0.15); color: var(--accent-green); }
+        .badge.negative { background: rgba(248,113,113,0.15); color: var(--accent-red); }
+        .badge.neutral  { background: rgba(251,191,36,0.15);  color: var(--accent-amber); }
+
+        .badge.new_product   { background: rgba(96,165,250,0.15);  color: var(--accent-blue); }
+        .badge.promotion     { background: rgba(167,139,250,0.15); color: var(--accent-purple); }
+        .badge.pop_up        { background: rgba(52,211,153,0.15);  color: var(--accent-green); }
+        .badge.collaboration { background: rgba(251,191,36,0.15);  color: var(--accent-amber); }
+        .badge.other         { background: rgba(136,136,136,0.15); color: var(--text-secondary); }
+
+        /* ── Event Card ── */
+        .event-list {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .event-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            transition: all 0.2s ease;
+        }
+
+        .event-card:hover {
+            border-color: var(--accent-green);
+        }
+
+        .event-card .event-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .event-card .event-detail {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        /* ── Footer ── */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .chart-row { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .container { padding: 1rem; }
+        }
+
+        /* ── No Data ── */
+        .no-data {
+            text-align: center;
+            color: var(--text-secondary);
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <h1>🌿 AVEDA 品牌情報日報</h1>
+    <p class="subtitle">2026-03-22 ｜ 共分析 5 筆輿情資料</p>
+</header>
+
+<main class="container">
+
+    <!-- ── 摘要統計卡片 ── -->
+    <section class="stats-grid" id="stats">
+        <div class="stat-card">
+            <div class="label">📊 總筆數</div>
+            <div class="value total">5</div>
+        </div>
+        <div class="stat-card">
+            <div class="label">😊 正面</div>
+            <div class="value positive">0 <small style="font-size:0.9rem; color:var(--text-secondary);">(0.0%)</small></div>
+        </div>
+        <div class="stat-card">
+            <div class="label">😟 負面</div>
+            <div class="value negative">0 <small style="font-size:0.9rem; color:var(--text-secondary);">(0.0%)</small></div>
+        </div>
+        <div class="stat-card">
+            <div class="label">😐 中立</div>
+            <div class="value neutral">5 <small style="font-size:0.9rem; color:var(--text-secondary);">(100.0%)</small></div>
+        </div>
+    </section>
+
+    <!-- ── 圖表區 ── -->
+    <section class="chart-row">
+        <div class="section">
+            <h2 class="section-title">📈 情緒分佈</h2>
+            <div class="chart-container">
+                <canvas id="sentimentChart"></canvas>
+            </div>
+        </div>
+        <div class="section">
+            <h2 class="section-title">🔥 熱門關鍵字</h2>
+            <div class="chart-container">
+                <canvas id="keywordChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── 活動列表 ── -->
+    <section class="section" id="events">
+        <h2 class="section-title">🎉 近期活動與事件</h2>
+        
+        <div class="no-data">今日未偵測到重大活動或事件。</div>
+        
+    </section>
+
+    <!-- ── 詳細列表 ── -->
+    <section class="section" id="details">
+        <h2 class="section-title">📋 輿情明細</h2>
+        
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>情緒</th>
+                    <th>標題</th>
+                    <th>來源</th>
+                    <th>關鍵字</th>
+                    <th>語系</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr>
+                    <td><span class="badge neutral">neutral</span></td>
+                    <td><a href="https://www.beaveda.com/2016/04/the-foundation-of-aveda" target="_blank">The Foundation of Aveda - Be Aveda</a></td>
+                    <td>Tavily Search</td>
+                    <td>AVEDA</td>
+                    <td>ZH</td>
+                </tr>
+                
+                <tr>
+                    <td><span class="badge neutral">neutral</span></td>
+                    <td><a href="https://hk.cosme.net/brands/3257" target="_blank">AVEDA 好用推薦產品</a></td>
+                    <td>Apify Google Search</td>
+                    <td>AVEDA 評價</td>
+                    <td>ZH</td>
+                </tr>
+                
+                <tr>
+                    <td><span class="badge neutral">neutral</span></td>
+                    <td><a href="https://www.sorra.net/brand/927" target="_blank">Aveda 好用嗎產品推薦評價成份資訊| 最真實化妝護膚品評價</a></td>
+                    <td>Apify Google Search</td>
+                    <td>AVEDA 評價</td>
+                    <td>ZH</td>
+                </tr>
+                
+                <tr>
+                    <td><span class="badge neutral">neutral</span></td>
+                    <td><a href="https://www.canmeng.com.tw/?srsltid=AfmBOooJEPSHPsv-UVyISxiPVhW6U0NwV4JceJHFRDubkPxMmG91H7oU" target="_blank">肯夢AVEDA | 專業花植美髮品牌</a></td>
+                    <td>Apify Google Search</td>
+                    <td>AVEDA 評價</td>
+                    <td>ZH</td>
+                </tr>
+                
+                <tr>
+                    <td><span class="badge neutral">neutral</span></td>
+                    <td><a href="https://m.cosme.net.tw/brands/4/reviews?page=8" target="_blank">AVEDA 肯夢使用心得一覽| 找美妝@cosme</a></td>
+                    <td>Apify Google Search</td>
+                    <td>AVEDA 評價</td>
+                    <td>ZH</td>
+                </tr>
+                
+            </tbody>
+        </table>
+        
+    </section>
+
+</main>
+
+<footer class="footer">
+    AVEDA Brand Intelligence System &copy; 2026-03-22 ｜ 自動產生報告
+</footer>
+
+<script>
+    // ── 情緒分佈圓餅圖 ──
+    const sentimentCtx = document.getElementById('sentimentChart').getContext('2d');
+    new Chart(sentimentCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['正面', '負面', '中立'],
+            datasets: [{
+                data: [0, 0, 5],
+                backgroundColor: ['#34d399', '#f87171', '#fbbf24'],
+                borderColor: '#1a1a1a',
+                borderWidth: 3,
+                hoverOffset: 8,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: { color: '#888', font: { size: 12 }, padding: 16 }
+                }
+            },
+            cutout: '60%',
+        }
+    });
+
+    // ── 熱門關鍵字長條圖 ──
+    const keywordCtx = document.getElementById('keywordChart').getContext('2d');
+    new Chart(keywordCtx, {
+        type: 'bar',
+        data: {
+            labels: ['AVEDA 評價', 'AVEDA'],
+            datasets: [{
+                label: '提及次數',
+                data: [4, 1],
+                backgroundColor: 'rgba(52, 211, 153, 0.6)',
+                borderColor: '#34d399',
+                borderWidth: 1,
+                borderRadius: 6,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            indexAxis: 'y',
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                x: {
+                    ticks: { color: '#888' },
+                    grid: { color: 'rgba(255,255,255,0.05)' },
+                },
+                y: {
+                    ticks: { color: '#888', font: { size: 11 } },
+                    grid: { display: false },
+                }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

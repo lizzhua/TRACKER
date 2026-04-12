@@ -442,7 +442,7 @@
 
 <header class="header">
     <h1>🌌 aespa SYNK: 情報庫</h1>
-    <p class="subtitle">2026-04-11 ｜ 共深入分析 5 筆全球輿情資料</p>
+    <p class="subtitle">2026-04-11 ｜ 共深入分析 3 筆全球輿情資料</p>
 </header>
 
 <main class="container">
@@ -451,11 +451,11 @@
     <section class="stats-grid" id="stats">
         <div class="glass-card stat-card total">
             <div class="label">💿 總資料探勘</div>
-            <div class="value total">5</div>
+            <div class="value total">3</div>
         </div>
         <div class="glass-card stat-card positive">
             <div class="label">🦋 正向訊號</div>
-            <div class="value positive">3<span class="pct">(60.0%)</span></div>
+            <div class="value positive">2<span class="pct">(66.7%)</span></div>
         </div>
         <div class="glass-card stat-card negative">
             <div class="label">👾 異常干擾</div>
@@ -463,7 +463,7 @@
         </div>
         <div class="glass-card stat-card neutral">
             <div class="label">🪐 中立資訊</div>
-            <div class="value neutral">2<span class="pct">(40.0%)</span></div>
+            <div class="value neutral">1<span class="pct">(33.3%)</span></div>
         </div>
     </section>
 
@@ -521,13 +521,13 @@
             
             <div class="event-card">
                 <div class="event-header">
-                    <span class="badge collaboration">collaboration</span>
+                    <span class="badge new_product">new_product</span>
                     <span style="font-size:0.85rem; color:var(--text-secondary);">⏱️ 2026-03-23</span>
                 </div>
                 <div class="event-detail">系統備用分析器：根據內文關鍵字自動辨識之動態。</div>
                 
                 <div style="margin-top:0.75rem;">
-                <a href="https://newtalk.tw/news/view/2026-04-10/1029129" target="_blank" style="font-size:0.8rem; color:var(--accent-blue); text-decoration:none; display:inline-flex; align-items:center; gap:4px; border: 1px solid rgba(59,130,246,0.3); padding:4px 10px; border-radius:12px; transition:all 0.2s; background:rgba(59,130,246,0.1);">
+                <a href="https://x.com/ningfinityning/status/2042903948173152385" target="_blank" style="font-size:0.8rem; color:var(--accent-blue); text-decoration:none; display:inline-flex; align-items:center; gap:4px; border: 1px solid rgba(59,130,246,0.3); padding:4px 10px; border-radius:12px; transition:all 0.2s; background:rgba(59,130,246,0.1);">
                     閱讀來源 <span>↗</span>
                 </a>
                 </div>
@@ -587,36 +587,12 @@
                     <tr class="data-row">
                         <td><span class="badge neutral">neutral</span></td>
                         <td>
-                            <a href="https://newtalk.tw/news/view/2026-04-10/1029129" target="_blank" title="aespa遭換臉性騷擾！經紀公司怒提告12人確定坐牢">
-                                aespa遭換臉性騷擾！經紀公司怒提告12人確定坐牢
+                            <a href="https://x.com/ningfinityning/status/2042903948173152385" target="_blank" title="Post by aespa COMEBACK in MAY -- on X: SHOCKK">
+                                Post by aespa COMEBACK in MAY -- on X: SHOCKK
                             </a>
                         </td>
                         <td class="source-tag">Apify Google Search</td>
-                        <td class="source-tag">aespa 最新評價</td>
-                        <td class="source-tag" style="text-transform: uppercase;">zh</td>
-                    </tr>
-                    
-                    <tr class="data-row">
-                        <td><span class="badge neutral">neutral</span></td>
-                        <td>
-                            <a href="https://today.line.me/tw/v3/article/8nX578E" target="_blank" title="aespa遭換臉性騷擾！經紀公司怒提告12人確定坐牢| 新頭殼">
-                                aespa遭換臉性騷擾！經紀公司怒提告12人確定坐牢| 新頭殼
-                            </a>
-                        </td>
-                        <td class="source-tag">Apify Google Search</td>
-                        <td class="source-tag">aespa 最新評價</td>
-                        <td class="source-tag" style="text-transform: uppercase;">zh</td>
-                    </tr>
-                    
-                    <tr class="data-row">
-                        <td><span class="badge positive">positive</span></td>
-                        <td>
-                            <a href="https://www.bilibili.com/video/BV1s7jPzLEkP/" target="_blank" title="大胆评价！【高音质消音】aespa-Supernova最新人气歌谣 ...">
-                                大胆评价！【高音质消音】aespa-Supernova最新人气歌谣 ...
-                            </a>
-                        </td>
-                        <td class="source-tag">Apify Google Search</td>
-                        <td class="source-tag">aespa 最新評價</td>
+                        <td class="source-tag">aespa comeback</td>
                         <td class="source-tag" style="text-transform: uppercase;">zh</td>
                     </tr>
                     
@@ -651,7 +627,7 @@
         data: {
             labels: ['正面 (Positive)', '負面 (Negative)', '中立 (Neutral)'],
             datasets: [{
-                data: [3, 0, 2],
+                data: [2, 0, 1],
                 backgroundColor: [gradientCyan, gradientMagenta, gradientSilver],
                 borderColor: '#0a0a0f',
                 borderWidth: 4,
@@ -691,10 +667,10 @@
     new Chart(keywordCtx, {
         type: 'bar',
         data: {
-            labels: ['aespa 最新評價', 'aespa'],
+            labels: ['aespa', 'aespa comeback'],
             datasets: [{
                 label: '提及次數',
-                data: [3, 2],
+                data: [2, 1],
                 backgroundColor: gradientBlue,
                 borderColor: 'transparent',
                 borderRadius: 8,

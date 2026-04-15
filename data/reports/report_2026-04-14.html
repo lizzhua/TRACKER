@@ -442,7 +442,7 @@
 
 <header class="header">
     <h1>🌌 aespa SYNK: 情報庫</h1>
-    <p class="subtitle">2026-04-14 ｜ 共深入分析 3 筆全球輿情資料</p>
+    <p class="subtitle">2026-04-14 ｜ 共深入分析 2 筆全球輿情資料</p>
 </header>
 
 <main class="container">
@@ -451,15 +451,15 @@
     <section class="stats-grid" id="stats">
         <div class="glass-card stat-card total">
             <div class="label">💿 總資料探勘</div>
-            <div class="value total">3</div>
+            <div class="value total">2</div>
         </div>
         <div class="glass-card stat-card positive">
             <div class="label">🦋 正向訊號</div>
-            <div class="value positive">2<span class="pct">(66.7%)</span></div>
+            <div class="value positive">2<span class="pct">(100.0%)</span></div>
         </div>
         <div class="glass-card stat-card negative">
             <div class="label">👾 異常干擾</div>
-            <div class="value negative">1<span class="pct">(33.3%)</span></div>
+            <div class="value negative">0<span class="pct">(0.0%)</span></div>
         </div>
         <div class="glass-card stat-card neutral">
             <div class="label">🪐 中立資訊</div>
@@ -519,21 +519,6 @@
                 
             </div>
             
-            <div class="event-card">
-                <div class="event-header">
-                    <span class="badge pop_up">pop_up</span>
-                    <span style="font-size:0.85rem; color:var(--text-secondary);">⏱️ 2026-03-23</span>
-                </div>
-                <div class="event-detail">系統備用分析器：根據內文關鍵字自動辨識之動態。</div>
-                
-                <div style="margin-top:0.75rem;">
-                <a href="https://hk.news.yahoo.com/aespa-%E9%A6%99%E6%B8%AF-%E6%BC%94%E5%94%B1%E6%9C%83-%E6%88%90%E5%93%A1-%E9%87%91%E5%8F%A5-020011231.html" target="_blank" style="font-size:0.8rem; color:var(--accent-blue); text-decoration:none; display:inline-flex; align-items:center; gap:4px; border: 1px solid rgba(59,130,246,0.3); padding:4px 10px; border-radius:12px; transition:all 0.2s; background:rgba(59,130,246,0.1);">
-                    閱讀來源 <span>↗</span>
-                </a>
-                </div>
-                
-            </div>
-            
         </div>
         
     </section>
@@ -584,18 +569,6 @@
                         <td class="source-tag" style="text-transform: uppercase;">zh</td>
                     </tr>
                     
-                    <tr class="data-row">
-                        <td><span class="badge negative">negative</span></td>
-                        <td>
-                            <a href="https://hk.news.yahoo.com/aespa-%E9%A6%99%E6%B8%AF-%E6%BC%94%E5%94%B1%E6%9C%83-%E6%88%90%E5%93%A1-%E9%87%91%E5%8F%A5-020011231.html" target="_blank" title="aespa香港演唱會2026｜2月7-8日來港演唱，Girl Crush自信魅力金句 ...">
-                                aespa香港演唱會2026｜2月7-8日來港演唱，Girl Crush自信魅力金句 ...
-                            </a>
-                        </td>
-                        <td class="source-tag">Tavily Search</td>
-                        <td class="source-tag">aespa 最新評價</td>
-                        <td class="source-tag" style="text-transform: uppercase;">zh</td>
-                    </tr>
-                    
                 </tbody>
             </table>
         </div>
@@ -627,7 +600,7 @@
         data: {
             labels: ['正面 (Positive)', '負面 (Negative)', '中立 (Neutral)'],
             datasets: [{
-                data: [2, 1, 0],
+                data: [2, 0, 0],
                 backgroundColor: [gradientCyan, gradientMagenta, gradientSilver],
                 borderColor: '#0a0a0f',
                 borderWidth: 4,
@@ -667,10 +640,10 @@
     new Chart(keywordCtx, {
         type: 'bar',
         data: {
-            labels: ['aespa', 'aespa 最新評價'],
+            labels: ['aespa'],
             datasets: [{
                 label: '提及次數',
-                data: [2, 1],
+                data: [2],
                 backgroundColor: gradientBlue,
                 borderColor: 'transparent',
                 borderRadius: 8,
